@@ -548,6 +548,53 @@
       display: none !important;
     }
 
+    /* ---- Closing Section ---- */
+    .closing-section {
+      position: relative;
+      z-index: 2;
+      min-height: 60vh;
+      text-align: center;
+    }
+
+    .closing-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .closing-script {
+      font-family: var(--font-script);
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      color: var(--text-heading);
+    }
+
+    .closing-names {
+      font-family: var(--font-script);
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      color: var(--text-heading);
+      margin-top: 8px;
+    }
+
+    .closing-date {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      letter-spacing: 4px;
+      color: var(--text-body);
+      opacity: 0.7;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 20px;
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      color: var(--text-body);
+      opacity: 0.5;
+      position: relative;
+      z-index: 2;
+    }
+
     /* Accessibility: respect reduced motion */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -735,6 +782,19 @@
       </div>
     </div>
   </section>
+
+  <!-- Section 5: Closing -->
+  <section class="section closing-section" id="closing">
+    <div class="fade-in closing-content">
+      <p class="closing-script">We can't wait to celebrate with you</p>
+      <p class="closing-names">Koon Hian &amp; Germaine</p>
+      <p class="closing-date">10 . 10 . 2026</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>With love, K &amp; G</p>
+  </footer>
 
   <script>
     // ---- Generate twinkling stars ----
