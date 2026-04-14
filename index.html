@@ -794,6 +794,102 @@
       update();
       setInterval(update, 1000);
     })();
+
+    // ---- Google Apps Script URL ----
+    // REPLACE THIS with your deployed Google Apps Script web app URL
+    const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+
+    // ---- RSVP Form Logic ----
+    (function setupForm() {
+      const form = document.getElementById('rsvp-form');
+      const attendingFields = document.getElementById('attending-fields');
+      const submitBtn = document.getElementById('submit-btn');
+      const btnText = submitBtn.querySelector('.btn-text');
+      const btnLoading = submitBtn.querySelector('.btn-loading');
+      const formError = document.getElementById('form-error');
+      const successDiv = document.getElementById('rsvp-success');
+
+      // Show/hide conditional fields based on attending selection
+      document.querySelectorAll('input[name="attending"]').forEach(function(radio) {
+        radio.addEventListener('change', function() {
+          if (this.value === 'Yes') {
+            attendingFields.classList.remove('hidden');
+          } else {
+            attendingFields.classList.add('hidden');
+          }
+        });
+      });
+
+      // Form submission
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        formError.classList.add('hidden');
+
+        // Validate required fields
+        var name = document.getElementById('guest-name').value.trim();
+        var side = form.querySelector('input[name="side"]:checked');
+        var attending = form.querySelector('input[name="attending"]:checked');
+
+        // Clear previous errors
+        form.querySelectorAll('.error').forEach(function(el) {
+          el.classList.remove('error');
+        });
+
+        var hasError = false;
+
+        if (!name) {
+          document.getElementById('guest-name').classList.add('error');
+          hasError = true;
+        }
+        if (!side) {
+          hasError = true;
+        }
+        if (!attending) {
+          hasError = true;
+        }
+
+        if (hasError) {
+          formError.classList.remove('hidden');
+          return;
+        }
+
+        // Gather form data
+        var data = {
+          name: name,
+          side: side.value,
+          attending: attending.value,
+          additionalGuests: attending.value === 'Yes' ? document.getElementById('additional-guests').value : '0',
+          dietary: attending.value === 'Yes' ? document.getElementById('dietary').value.trim() : '',
+          specialRequests: attending.value === 'Yes' ? document.getElementById('special-requests').value.trim() : '',
+          message: document.getElementById('message').value.trim()
+        };
+
+        // Disable button, show loading
+        submitBtn.disabled = true;
+        btnText.classList.add('hidden');
+        btnLoading.classList.remove('hidden');
+
+        // Submit to Google Apps Script
+        fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        })
+        .then(function() {
+          // no-cors means we can't read the response, show success optimistically
+          form.classList.add('hidden');
+          successDiv.classList.remove('hidden');
+        })
+        .catch(function() {
+          submitBtn.disabled = false;
+          btnText.classList.remove('hidden');
+          btnLoading.classList.add('hidden');
+          formError.textContent = 'Something went wrong. Please try again.';
+          formError.classList.remove('hidden');
+        });
+      });
+    })();
   </script>
 </body>
 </html>
