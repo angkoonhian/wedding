@@ -255,6 +255,59 @@
       margin-top: 8px;
     }
 
+    /* ---- Wedding Details ---- */
+    .details-section {
+      position: relative;
+      z-index: 2;
+      min-height: auto;
+      padding: 80px 20px;
+    }
+
+    .details-card {
+      max-width: 700px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .details-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 30px;
+      margin-top: 10px;
+    }
+
+    .detail-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .detail-icon {
+      font-size: 2rem;
+      margin-bottom: 4px;
+    }
+
+    .detail-heading {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-heading);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .detail-item p {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      color: var(--text-body);
+    }
+
+    .detail-sub {
+      font-size: 0.85rem !important;
+      opacity: 0.7;
+    }
+
     @keyframes floatUp {
       0% {
         transform: translateY(0) translateX(0);
@@ -340,6 +393,31 @@
         <div class="countdown-item glass-card">
           <span class="countdown-number" id="cd-seconds">00</span>
           <span class="countdown-label">Seconds</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Wedding Details -->
+  <section class="section details-section" id="details">
+    <div class="fade-in glass-card details-card">
+      <h2 class="section-title">Wedding Details</h2>
+      <div class="details-grid">
+        <div class="detail-item">
+          <span class="detail-icon">&#128197;</span>
+          <h3 class="detail-heading">Date</h3>
+          <p>Saturday, 10 October 2026</p>
+        </div>
+        <div class="detail-item">
+          <span class="detail-icon">&#127860;</span>
+          <h3 class="detail-heading">Event</h3>
+          <p>Dinner Reception</p>
+        </div>
+        <div class="detail-item">
+          <span class="detail-icon">&#127976;</span>
+          <h3 class="detail-heading">Venue</h3>
+          <p>Pan Pacific Orchard</p>
+          <p class="detail-sub">10 Claymore Rd, Singapore 229540</p>
         </div>
       </div>
     </div>
