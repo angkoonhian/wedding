@@ -18,7 +18,12 @@
 function doPost(e) {
   try {
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-    var data = JSON.parse(e.postData.contents);
+    var data;
+    if (e.postData.type === 'application/x-www-form-urlencoded') {
+      data = e.parameter;
+    } else {
+      data = JSON.parse(e.postData.contents);
+    }
 
     sheet.appendRow([
       new Date(),

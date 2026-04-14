@@ -409,7 +409,12 @@
     }
 
     .radio-label input[type="radio"] {
-      display: none;
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
     }
 
     .radio-custom {
@@ -420,6 +425,10 @@
       position: relative;
       transition: border-color 0.3s;
       flex-shrink: 0;
+    }
+
+    .radio-label input[type="radio"]:focus-visible + .radio-custom {
+      box-shadow: 0 0 0 3px rgba(155, 114, 176, 0.3);
     }
 
     .radio-label input[type="radio"]:checked + .radio-custom {
@@ -987,8 +996,7 @@
         fetch(GOOGLE_SCRIPT_URL, {
           method: 'POST',
           mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data)
+          body: new URLSearchParams(data)
         })
         .then(function() {
           // no-cors means we can't read the response, show success optimistically
