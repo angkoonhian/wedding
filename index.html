@@ -325,6 +325,229 @@
       }
     }
 
+    /* ---- RSVP Section ---- */
+    .rsvp-section {
+      position: relative;
+      z-index: 2;
+      min-height: auto;
+      padding: 80px 20px;
+    }
+
+    .rsvp-card {
+      max-width: 560px;
+      width: 100%;
+    }
+
+    .rsvp-subtitle {
+      text-align: center;
+      font-family: var(--font-serif);
+      font-style: italic;
+      color: var(--text-body);
+      margin-top: -20px;
+      margin-bottom: 30px;
+    }
+
+    .form-group {
+      margin-bottom: 22px;
+    }
+
+    .form-group label {
+      display: block;
+      font-family: var(--font-serif);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-heading);
+      margin-bottom: 6px;
+      letter-spacing: 0.5px;
+    }
+
+    .required {
+      color: #D4A0B0;
+    }
+
+    .form-group input[type="text"],
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 12px 16px;
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      color: var(--text-body);
+      background: rgba(255, 255, 255, 0.6);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      outline: none;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--text-heading);
+      box-shadow: 0 0 0 3px rgba(155, 114, 176, 0.15);
+    }
+
+    .form-group input.error,
+    .form-group textarea.error {
+      border-color: #D4A0B0;
+    }
+
+    /* Radio buttons */
+    .radio-group {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .radio-label {
+      display: flex !important;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      font-weight: 300 !important;
+      font-family: var(--font-sans) !important;
+    }
+
+    .radio-label input[type="radio"] {
+      display: none;
+    }
+
+    .radio-custom {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--card-border);
+      border-radius: 50%;
+      position: relative;
+      transition: border-color 0.3s;
+      flex-shrink: 0;
+    }
+
+    .radio-label input[type="radio"]:checked + .radio-custom {
+      border-color: var(--text-heading);
+    }
+
+    .radio-label input[type="radio"]:checked + .radio-custom::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 10px;
+      height: 10px;
+      background: var(--text-heading);
+      border-radius: 50%;
+    }
+
+    /* Conditional fields */
+    .attending-fields {
+      transition: opacity 0.4s ease, max-height 0.4s ease;
+      max-height: 500px;
+      opacity: 1;
+      overflow: hidden;
+    }
+
+    .attending-fields.hidden {
+      display: block !important;
+      max-height: 0;
+      opacity: 0;
+      margin: 0;
+      pointer-events: none;
+    }
+
+    /* Submit button */
+    .submit-btn {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: white;
+      background: linear-gradient(135deg, var(--text-heading), #C09BD8);
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(155, 114, 176, 0.35);
+    }
+
+    .submit-btn:active {
+      transform: translateY(0);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* Sparkle on hover */
+    .submit-btn::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+
+    .submit-btn:hover::after {
+      opacity: 1;
+    }
+
+    .form-error {
+      text-align: center;
+      color: #C07090;
+      font-size: 0.85rem;
+      margin-top: 12px;
+    }
+
+    /* Success state */
+    .rsvp-success {
+      text-align: center;
+      padding: 40px 0;
+    }
+
+    .rsvp-success h3 {
+      font-family: var(--font-script);
+      font-size: 2.5rem;
+      color: var(--text-heading);
+      margin-bottom: 12px;
+    }
+
+    .rsvp-success p {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      color: var(--text-body);
+    }
+
+    .success-sparkle {
+      font-size: 3rem;
+      margin-bottom: 16px;
+      animation: sparkleRotate 2s ease-in-out infinite;
+    }
+
+    @keyframes sparkleRotate {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      50% { transform: scale(1.2) rotate(10deg); }
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
     /* Accessibility: respect reduced motion */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -419,6 +642,96 @@
           <p>Pan Pacific Orchard</p>
           <p class="detail-sub">10 Claymore Rd, Singapore 229540</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: RSVP Form -->
+  <section class="section rsvp-section" id="rsvp">
+    <div class="fade-in glass-card rsvp-card">
+      <h2 class="section-title">RSVP</h2>
+      <p class="rsvp-subtitle">Kindly respond by 10 September 2026</p>
+
+      <form id="rsvp-form" novalidate>
+        <div class="form-group">
+          <label for="guest-name">Full Name <span class="required">*</span></label>
+          <input type="text" id="guest-name" name="name" required placeholder="Your full name">
+        </div>
+
+        <div class="form-group">
+          <label>Side <span class="required">*</span></label>
+          <div class="radio-group">
+            <label class="radio-label">
+              <input type="radio" name="side" value="Groom" required>
+              <span class="radio-custom"></span>
+              Groom's Side
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="side" value="Bride" required>
+              <span class="radio-custom"></span>
+              Bride's Side
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Attending <span class="required">*</span></label>
+          <div class="radio-group">
+            <label class="radio-label">
+              <input type="radio" name="attending" value="Yes" required>
+              <span class="radio-custom"></span>
+              Joyfully Accepts
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="attending" value="No" required>
+              <span class="radio-custom"></span>
+              Regretfully Declines
+            </label>
+          </div>
+        </div>
+
+        <div id="attending-fields" class="attending-fields hidden">
+          <div class="form-group">
+            <label for="additional-guests">Number of Additional Guests</label>
+            <select id="additional-guests" name="additionalGuests">
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="dietary">Dietary Restrictions</label>
+            <input type="text" id="dietary" name="dietary" placeholder="e.g. Vegetarian, No shellfish">
+          </div>
+
+          <div class="form-group">
+            <label for="special-requests">Special Requests</label>
+            <input type="text" id="special-requests" name="specialRequests" placeholder="Any special arrangements">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Message to the Couple</label>
+          <textarea id="message" name="message" rows="4" placeholder="Your warm wishes..."></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submit-btn">
+          <span class="btn-text">Send RSVP</span>
+          <span class="btn-loading hidden">Sending...</span>
+        </button>
+
+        <p class="form-error hidden" id="form-error">Please fill in all required fields.</p>
+      </form>
+
+      <!-- Success message (hidden by default) -->
+      <div class="rsvp-success hidden" id="rsvp-success">
+        <div class="success-sparkle">&#10024;</div>
+        <h3>Thank You!</h3>
+        <p>Your RSVP has been received. We look forward to celebrating with you!</p>
       </div>
     </div>
   </section>
