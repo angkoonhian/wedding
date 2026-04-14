@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Wedding RSVP for Koon Hian & Germaine - 10 October 2026">
+  <title>Koon Hian & Germaine — 10.10.2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-lilac: #F0E4FF;
+      --bg-rose: #FADADD;
+      --bg-cream: #FFF5F7;
+      --text-heading: #9B72B0;
+      --text-body: #5A4670;
+      --accent-rose: #F2D1E0;
+      --card-bg: rgba(255, 255, 255, 0.4);
+      --card-border: #DCC8F0;
+      --shimmer: #E8E0F0;
+      --font-script: 'Great Vibes', cursive;
+      --font-serif: 'Cormorant Garamond', serif;
+      --font-sans: 'Lato', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      color: var(--text-body);
+      background: linear-gradient(180deg, var(--bg-lilac) 0%, var(--bg-rose) 50%, var(--bg-cream) 100%);
+      background-attachment: fixed;
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* Glassmorphism card */
+    .glass-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 40px;
+    }
+
+    /* Section base */
+    .section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 20px;
+      position: relative;
+    }
+
+    /* Scroll entrance animation base */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Accessibility: respect reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sections will be added in subsequent tasks -->
+
+  <script>
+    // JS will be added in subsequent tasks
+  </script>
+</body>
+</html>
