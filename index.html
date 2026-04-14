@@ -950,6 +950,41 @@
         });
       });
     })();
+
+    // ---- Scroll Entrance Animations (Intersection Observer) ----
+    (function setupScrollAnimations() {
+      var targets = document.querySelectorAll('.fade-in');
+      if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.15 });
+
+        targets.forEach(function(el) { observer.observe(el); });
+      } else {
+        // Fallback: show everything
+        targets.forEach(function(el) { el.classList.add('visible'); });
+      }
+    })();
+
+    // ---- Parallax Background ----
+    (function setupParallax() {
+      var ticking = false;
+      window.addEventListener('scroll', function() {
+        if (!ticking) {
+          requestAnimationFrame(function() {
+            var scrollY = window.pageYOffset;
+            document.body.style.backgroundPositionY = (scrollY * 0.3) + 'px';
+            ticking = false;
+          });
+          ticking = true;
+        }
+      });
+    })();
   </script>
 </body>
 </html>
