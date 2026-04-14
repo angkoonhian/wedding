@@ -198,6 +198,63 @@
       50% { transform: translateX(-50%) translateY(10px); }
     }
 
+    /* ---- Section Titles ---- */
+    .section-title {
+      font-family: var(--font-script);
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      color: var(--text-heading);
+      text-align: center;
+      margin-bottom: 40px;
+      font-weight: 400;
+    }
+
+    /* ---- Countdown ---- */
+    .countdown-section {
+      position: relative;
+      z-index: 2;
+      min-height: auto;
+      padding: 80px 20px;
+    }
+
+    .countdown {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .countdown-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 120px;
+      height: 120px;
+      padding: 20px;
+    }
+
+    .countdown-number {
+      font-family: var(--font-serif);
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: var(--text-heading);
+      line-height: 1;
+      transition: transform 0.3s ease;
+    }
+
+    .countdown-number.pulse {
+      transform: scale(1.05);
+    }
+
+    .countdown-label {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-body);
+      margin-top: 8px;
+    }
+
     @keyframes floatUp {
       0% {
         transform: translateY(0) translateX(0);
@@ -263,6 +320,31 @@
     </div>
   </section>
 
+  <!-- Section 2: Countdown -->
+  <section class="section countdown-section" id="countdown">
+    <div class="fade-in">
+      <h2 class="section-title">Counting Down To Forever</h2>
+      <div class="countdown" id="countdown-timer">
+        <div class="countdown-item glass-card">
+          <span class="countdown-number" id="cd-days">000</span>
+          <span class="countdown-label">Days</span>
+        </div>
+        <div class="countdown-item glass-card">
+          <span class="countdown-number" id="cd-hours">00</span>
+          <span class="countdown-label">Hours</span>
+        </div>
+        <div class="countdown-item glass-card">
+          <span class="countdown-number" id="cd-minutes">00</span>
+          <span class="countdown-label">Minutes</span>
+        </div>
+        <div class="countdown-item glass-card">
+          <span class="countdown-number" id="cd-seconds">00</span>
+          <span class="countdown-label">Seconds</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <script>
     // ---- Generate twinkling stars ----
     (function generateStars() {
@@ -280,6 +362,46 @@
         star.style.setProperty('--delay', (Math.random() * 5) + 's');
         container.appendChild(star);
       }
+    })();
+
+    // ---- Countdown Timer ----
+    (function startCountdown() {
+      const weddingDate = new Date('2026-10-10T18:00:00+08:00').getTime();
+      const daysEl = document.getElementById('cd-days');
+      const hoursEl = document.getElementById('cd-hours');
+      const minutesEl = document.getElementById('cd-minutes');
+      const secondsEl = document.getElementById('cd-seconds');
+
+      function update() {
+        const now = Date.now();
+        const diff = weddingDate - now;
+
+        if (diff <= 0) {
+          daysEl.textContent = '0';
+          hoursEl.textContent = '0';
+          minutesEl.textContent = '0';
+          secondsEl.textContent = '0';
+          return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        daysEl.textContent = days;
+        hoursEl.textContent = String(hours).padStart(2, '0');
+        minutesEl.textContent = String(minutes).padStart(2, '0');
+
+        if (secondsEl.textContent !== String(seconds).padStart(2, '0')) {
+          secondsEl.textContent = String(seconds).padStart(2, '0');
+          secondsEl.classList.add('pulse');
+          setTimeout(() => secondsEl.classList.remove('pulse'), 300);
+        }
+      }
+
+      update();
+      setInterval(update, 1000);
     })();
   </script>
 </body>
