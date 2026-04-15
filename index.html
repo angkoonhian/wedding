@@ -7,7 +7,7 @@
   <title>Koon Hian & Germaine — 10.10.2026</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after {
       margin: 0;
@@ -16,18 +16,20 @@
     }
 
     :root {
-      --bg-lilac: #F0E4FF;
-      --bg-rose: #FADADD;
-      --bg-cream: #FFF5F7;
-      --text-heading: #9B72B0;
-      --text-body: #5A4670;
-      --accent-rose: #F2D1E0;
-      --card-bg: rgba(255, 255, 255, 0.4);
-      --card-border: #DCC8F0;
-      --shimmer: #E8E0F0;
-      --font-script: 'Great Vibes', cursive;
-      --font-serif: 'Cormorant Garamond', serif;
-      --font-sans: 'Lato', sans-serif;
+      --bg-pink: #FFF0F3;
+      --bg-white: #FFFAF8;
+      --gold: #B8860B;
+      --gold-light: #D4A843;
+      --gold-faint: #F5EDDC;
+      --pink: #FFD6E0;
+      --pink-light: #FFF0F3;
+      --text-heading: #8B6914;
+      --text-body: #5C4A3A;
+      --text-light: #9A8A7A;
+      --card-bg: rgba(255, 255, 255, 0.7);
+      --card-border: #E8D5B8;
+      --font-heading: 'Cinzel', serif;
+      --font-body: 'Montserrat', sans-serif;
     }
 
     html {
@@ -35,134 +37,78 @@
     }
 
     body {
-      font-family: var(--font-sans);
+      font-family: var(--font-body);
       color: var(--text-body);
-      background: linear-gradient(180deg, var(--bg-lilac) 0%, var(--bg-rose) 50%, var(--bg-cream) 100%);
-      background-attachment: fixed;
+      background: var(--bg-white);
       min-height: 100vh;
       overflow-x: hidden;
       line-height: 1.6;
     }
 
-    /* Glassmorphism card */
-    .glass-card {
-      background: var(--card-bg);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      padding: 40px;
+    /* ---- Divider ---- */
+    .divider {
+      width: 60px;
+      height: 1px;
+      background: var(--gold-light);
+      margin: 0 auto;
     }
 
-    /* Section base */
-    .section {
+    /* ---- Hero ---- */
+    .hero {
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 60px 20px;
-      position: relative;
-    }
-
-    /* Scroll entrance animation base */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-    }
-
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ---- Stars ---- */
-    .stars {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .star {
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.9);
-      animation: twinkle var(--duration) ease-in-out infinite;
-      animation-delay: var(--delay);
-    }
-
-    @keyframes twinkle {
-      0%, 100% { opacity: 0.2; transform: scale(1); }
-      50% { opacity: 1; transform: scale(1.3); }
-    }
-
-    /* ---- Floating Particles ---- */
-    .particles {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1;
-      overflow: hidden;
-    }
-
-    .particle {
-      position: absolute;
-      bottom: -10px;
-      left: var(--x);
-      width: var(--size);
-      height: var(--size);
-      background: radial-gradient(circle, rgba(220, 200, 240, 0.8), rgba(242, 209, 224, 0.4));
-      border-radius: 50%;
-      animation: floatUp var(--duration) linear infinite;
-      animation-delay: var(--delay);
-    }
-
-    /* ---- Hero Section ---- */
-    .hero {
-      position: relative;
-      z-index: 2;
       text-align: center;
-      min-height: 100vh;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
+      padding: 60px 20px;
+      background: linear-gradient(180deg, var(--bg-pink) 0%, var(--bg-white) 100%);
     }
 
     .hero-names {
-      font-family: var(--font-script);
-      font-size: clamp(2.5rem, 8vw, 5.5rem);
-      color: var(--text-heading);
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      color: var(--gold);
       font-weight: 400;
-      line-height: 1.3;
-      margin-bottom: 16px;
+      line-height: 1.4;
+      letter-spacing: 3px;
+      margin-bottom: 20px;
     }
 
-    .ampersand {
-      display: inline-block;
-      font-size: 0.7em;
-      margin: 0 8px;
-      opacity: 0.7;
+    .hero-ampersand {
+      display: block;
+      font-size: 0.5em;
+      margin: 4px 0;
+      opacity: 0.6;
     }
 
     .hero-date {
-      font-family: var(--font-serif);
-      font-size: clamp(1.2rem, 3vw, 1.8rem);
-      color: var(--text-body);
+      font-family: var(--font-heading);
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      color: var(--text-light);
       letter-spacing: 6px;
+      font-weight: 300;
+      margin-bottom: 12px;
+    }
+
+    .hero-venue {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: var(--text-light);
+      font-weight: 300;
+      letter-spacing: 1px;
+    }
+
+    .hero-intro {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 24px;
       font-weight: 300;
     }
 
-    /* Scroll indicator */
     .scroll-indicator {
       position: absolute;
       bottom: 40px;
@@ -171,56 +117,59 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
-      animation: bounce 2s ease-in-out infinite;
+      gap: 6px;
     }
 
     .scroll-indicator span {
-      font-family: var(--font-sans);
-      font-size: 0.75rem;
+      font-family: var(--font-body);
+      font-size: 0.7rem;
       letter-spacing: 3px;
       text-transform: uppercase;
-      color: var(--text-heading);
-      opacity: 0.6;
-    }
-
-    .scroll-chevron {
-      width: 20px;
-      height: 20px;
-      border-right: 2px solid var(--text-heading);
-      border-bottom: 2px solid var(--text-heading);
-      transform: rotate(45deg);
+      color: var(--text-light);
       opacity: 0.5;
     }
 
-    @keyframes bounce {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50% { transform: translateX(-50%) translateY(10px); }
+    .scroll-chevron {
+      width: 16px;
+      height: 16px;
+      border-right: 1.5px solid var(--text-light);
+      border-bottom: 1.5px solid var(--text-light);
+      transform: rotate(45deg);
+      opacity: 0.4;
     }
 
-    /* ---- Section Titles ---- */
-    .section-title {
-      font-family: var(--font-script);
-      font-size: clamp(1.8rem, 5vw, 3rem);
-      color: var(--text-heading);
+    /* ---- Section ---- */
+    .section {
+      padding: 80px 20px;
+      max-width: 700px;
+      margin: 0 auto;
       text-align: center;
-      margin-bottom: 40px;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      color: var(--gold);
+      margin-bottom: 12px;
       font-weight: 400;
+      letter-spacing: 2px;
+    }
+
+    .section-subtitle {
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      color: var(--text-light);
+      font-style: italic;
+      margin-bottom: 40px;
     }
 
     /* ---- Countdown ---- */
-    .countdown-section {
-      position: relative;
-      z-index: 2;
-      min-height: auto;
-      padding: 80px 20px;
-    }
-
     .countdown {
       display: flex;
-      gap: 20px;
+      gap: 16px;
       justify-content: center;
       flex-wrap: wrap;
+      margin-top: 30px;
     }
 
     .countdown-item {
@@ -228,47 +177,31 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      width: 120px;
-      height: 120px;
-      padding: 20px;
+      width: 100px;
+      height: 100px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
     }
 
     .countdown-number {
-      font-family: var(--font-serif);
-      font-size: 2.5rem;
+      font-family: var(--font-heading);
+      font-size: 2.2rem;
       font-weight: 600;
-      color: var(--text-heading);
+      color: var(--gold);
       line-height: 1;
-      transition: transform 0.3s ease;
-    }
-
-    .countdown-number.pulse {
-      transform: scale(1.05);
     }
 
     .countdown-label {
-      font-family: var(--font-sans);
-      font-size: 0.75rem;
+      font-family: var(--font-body);
+      font-size: 0.7rem;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: var(--text-body);
-      margin-top: 8px;
+      color: var(--text-light);
+      margin-top: 6px;
     }
 
-    /* ---- Wedding Details ---- */
-    .details-section {
-      position: relative;
-      z-index: 2;
-      min-height: auto;
-      padding: 80px 20px;
-    }
-
-    .details-card {
-      max-width: 700px;
-      width: 100%;
-      text-align: center;
-    }
-
+    /* ---- Details ---- */
     .details-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -280,116 +213,90 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 6px;
-    }
-
-    .detail-icon {
-      font-size: 2rem;
-      margin-bottom: 4px;
+      gap: 4px;
     }
 
     .detail-heading {
-      font-family: var(--font-serif);
-      font-size: 1.1rem;
+      font-family: var(--font-heading);
+      font-size: 0.85rem;
       font-weight: 600;
-      color: var(--text-heading);
-      letter-spacing: 1px;
+      color: var(--gold);
+      letter-spacing: 2px;
       text-transform: uppercase;
+      margin-bottom: 4px;
     }
 
     .detail-item p {
-      font-family: var(--font-serif);
-      font-size: 1rem;
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
       color: var(--text-body);
     }
 
     .detail-sub {
       font-size: 0.85rem !important;
-      opacity: 0.7;
+      color: var(--text-light) !important;
     }
 
-    @keyframes floatUp {
-      0% {
-        transform: translateY(0) translateX(0);
-        opacity: 0;
-      }
-      10% {
-        opacity: 0.8;
-      }
-      90% {
-        opacity: 0.6;
-      }
-      100% {
-        transform: translateY(-110vh) translateX(30px);
-        opacity: 0;
-      }
-    }
-
-    /* ---- RSVP Section ---- */
+    /* ---- RSVP Form ---- */
     .rsvp-section {
-      position: relative;
-      z-index: 2;
-      min-height: auto;
       padding: 80px 20px;
+      max-width: 520px;
+      margin: 0 auto;
     }
 
     .rsvp-card {
-      max-width: 560px;
-      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 40px;
+      text-align: left;
     }
 
-    .rsvp-subtitle {
+    .rsvp-card .section-title,
+    .rsvp-card .section-subtitle {
       text-align: center;
-      font-family: var(--font-serif);
-      font-style: italic;
-      color: var(--text-body);
-      margin-top: -20px;
-      margin-bottom: 30px;
     }
 
     .form-group {
-      margin-bottom: 22px;
+      margin-bottom: 20px;
     }
 
     .form-group label {
       display: block;
-      font-family: var(--font-serif);
+      font-family: var(--font-heading);
       font-size: 0.95rem;
       font-weight: 600;
       color: var(--text-heading);
       margin-bottom: 6px;
-      letter-spacing: 0.5px;
     }
 
     .required {
-      color: #D4A0B0;
+      color: var(--gold-light);
     }
 
     .form-group input[type="text"],
     .form-group textarea,
     .form-group select {
       width: 100%;
-      padding: 12px 16px;
-      font-family: var(--font-sans);
+      padding: 10px 14px;
+      font-family: var(--font-body);
       font-size: 0.95rem;
       color: var(--text-body);
-      background: rgba(255, 255, 255, 0.6);
+      background: white;
       border: 1px solid var(--card-border);
-      border-radius: 10px;
+      border-radius: 8px;
       outline: none;
-      transition: border-color 0.3s, box-shadow 0.3s;
+      transition: border-color 0.3s;
     }
 
     .form-group input:focus,
     .form-group textarea:focus,
     .form-group select:focus {
-      border-color: var(--text-heading);
-      box-shadow: 0 0 0 3px rgba(155, 114, 176, 0.15);
+      border-color: var(--gold-light);
     }
 
-    .form-group input.error,
-    .form-group textarea.error {
-      border-color: #D4A0B0;
+    .form-group input.error {
+      border-color: #D4796A;
     }
 
     /* Radio buttons */
@@ -405,7 +312,7 @@
       gap: 8px;
       cursor: pointer;
       font-weight: 300 !important;
-      font-family: var(--font-sans) !important;
+      font-family: var(--font-body) !important;
     }
 
     .radio-label input[type="radio"] {
@@ -418,9 +325,9 @@
     }
 
     .radio-custom {
-      width: 20px;
-      height: 20px;
-      border: 2px solid var(--card-border);
+      width: 18px;
+      height: 18px;
+      border: 1.5px solid var(--card-border);
       border-radius: 50%;
       position: relative;
       transition: border-color 0.3s;
@@ -428,11 +335,11 @@
     }
 
     .radio-label input[type="radio"]:focus-visible + .radio-custom {
-      box-shadow: 0 0 0 3px rgba(155, 114, 176, 0.3);
+      box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.2);
     }
 
     .radio-label input[type="radio"]:checked + .radio-custom {
-      border-color: var(--text-heading);
+      border-color: var(--gold);
     }
 
     .radio-label input[type="radio"]:checked + .radio-custom::after {
@@ -441,25 +348,23 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 10px;
-      height: 10px;
-      background: var(--text-heading);
+      width: 8px;
+      height: 8px;
+      background: var(--gold);
       border-radius: 50%;
     }
 
     /* Conditional fields */
     .attending-fields {
-      transition: opacity 0.4s ease, max-height 0.4s ease;
-      max-height: 500px;
+      transition: opacity 0.3s ease, max-height 0.3s ease;
+      max-height: 400px;
       opacity: 1;
       overflow: hidden;
     }
 
     .attending-fields.hidden {
-      display: block !important;
       max-height: 0;
       opacity: 0;
-      margin: 0;
       pointer-events: none;
     }
 
@@ -467,60 +372,37 @@
     .submit-btn {
       display: block;
       width: 100%;
-      padding: 14px;
-      font-family: var(--font-serif);
-      font-size: 1.1rem;
+      padding: 13px;
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
       font-weight: 600;
       letter-spacing: 1px;
       color: white;
-      background: linear-gradient(135deg, var(--text-heading), #C09BD8);
+      background: var(--gold);
       border: none;
-      border-radius: 12px;
+      border-radius: 8px;
       cursor: pointer;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.3s, box-shadow 0.3s;
+      transition: background 0.3s;
     }
 
     .submit-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(155, 114, 176, 0.35);
-    }
-
-    .submit-btn:active {
-      transform: translateY(0);
+      background: var(--gold-light);
     }
 
     .submit-btn:disabled {
-      opacity: 0.6;
+      opacity: 0.5;
       cursor: not-allowed;
-      transform: none;
-      box-shadow: none;
-    }
-
-    /* Sparkle on hover */
-    .submit-btn::after {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 60%);
-      opacity: 0;
-      transition: opacity 0.3s;
-      pointer-events: none;
-    }
-
-    .submit-btn:hover::after {
-      opacity: 1;
     }
 
     .form-error {
       text-align: center;
-      color: #C07090;
+      color: #C07060;
       font-size: 0.85rem;
       margin-top: 12px;
+    }
+
+    .hidden {
+      display: none !important;
     }
 
     /* Success state */
@@ -530,120 +412,84 @@
     }
 
     .rsvp-success h3 {
-      font-family: var(--font-script);
-      font-size: 2.5rem;
-      color: var(--text-heading);
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      color: var(--gold);
       margin-bottom: 12px;
+      letter-spacing: 2px;
     }
 
     .rsvp-success p {
-      font-family: var(--font-serif);
-      font-size: 1.1rem;
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
       color: var(--text-body);
     }
 
-    .success-sparkle {
-      font-size: 3rem;
-      margin-bottom: 16px;
-      animation: sparkleRotate 2s ease-in-out infinite;
-    }
-
-    @keyframes sparkleRotate {
-      0%, 100% { transform: scale(1) rotate(0deg); }
-      50% { transform: scale(1.2) rotate(10deg); }
-    }
-
-    .hidden {
-      display: none !important;
-    }
-
-    /* ---- Closing Section ---- */
-    .closing-section {
-      position: relative;
-      z-index: 2;
-      min-height: 60vh;
+    /* ---- Closing ---- */
+    .closing {
+      padding: 80px 20px 40px;
       text-align: center;
     }
 
-    .closing-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-    }
-
     .closing-script {
-      font-family: var(--font-script);
-      font-size: clamp(1.5rem, 4vw, 2.5rem);
-      color: var(--text-heading);
+      font-family: var(--font-body);
+      font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+      color: var(--text-light);
+      margin-bottom: 12px;
+      font-weight: 300;
+      letter-spacing: 1px;
     }
 
     .closing-names {
-      font-family: var(--font-script);
-      font-size: clamp(2rem, 6vw, 3.5rem);
-      color: var(--text-heading);
-      margin-top: 8px;
+      font-family: var(--font-heading);
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      color: var(--gold);
+      letter-spacing: 3px;
     }
 
     .closing-date {
-      font-family: var(--font-serif);
-      font-size: 1rem;
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
       letter-spacing: 4px;
-      color: var(--text-body);
-      opacity: 0.7;
+      color: var(--text-light);
+      margin-top: 12px;
     }
 
     .footer {
       text-align: center;
       padding: 20px;
-      font-family: var(--font-sans);
-      font-size: 0.8rem;
-      color: var(--text-body);
-      opacity: 0.5;
-      position: relative;
-      z-index: 2;
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      color: var(--text-light);
     }
 
     /* ---- Responsive ---- */
     @media (max-width: 768px) {
-      .section {
-        padding: 50px 16px;
-      }
-
-      .glass-card {
-        padding: 28px 20px;
-      }
-
       .countdown {
-        gap: 12px;
+        gap: 10px;
       }
 
       .countdown-item {
-        width: 80px;
-        height: 80px;
-        padding: 12px;
+        width: 75px;
+        height: 75px;
       }
 
       .countdown-number {
-        font-size: 1.8rem;
-      }
-
-      .countdown-label {
-        font-size: 0.65rem;
+        font-size: 1.6rem;
       }
 
       .radio-group {
         flex-direction: column;
-        gap: 12px;
+        gap: 10px;
       }
 
       .details-grid {
         grid-template-columns: 1fr;
-        gap: 24px;
+        gap: 20px;
       }
 
-      .hero {
-        padding: 40px 20px;
+      .rsvp-card {
+        padding: 28px 20px;
       }
     }
 
@@ -658,11 +504,9 @@
       }
     }
 
-    /* Accessibility: respect reduced motion */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
       }
     }
@@ -670,102 +514,79 @@
 </head>
 <body>
 
-  <!-- Stars overlay -->
-  <div class="stars" id="stars" aria-hidden="true"></div>
-
-  <!-- Floating particles -->
-  <div class="particles" aria-hidden="true">
-    <div class="particle" style="--x: 10%; --size: 4px; --duration: 12s; --delay: 0s;"></div>
-    <div class="particle" style="--x: 20%; --size: 6px; --duration: 16s; --delay: 2s;"></div>
-    <div class="particle" style="--x: 35%; --size: 3px; --duration: 10s; --delay: 4s;"></div>
-    <div class="particle" style="--x: 45%; --size: 5px; --duration: 14s; --delay: 1s;"></div>
-    <div class="particle" style="--x: 55%; --size: 7px; --duration: 18s; --delay: 3s;"></div>
-    <div class="particle" style="--x: 65%; --size: 4px; --duration: 11s; --delay: 5s;"></div>
-    <div class="particle" style="--x: 75%; --size: 6px; --duration: 15s; --delay: 2.5s;"></div>
-    <div class="particle" style="--x: 85%; --size: 3px; --duration: 13s; --delay: 4.5s;"></div>
-    <div class="particle" style="--x: 50%; --size: 5px; --duration: 17s; --delay: 1.5s;"></div>
-    <div class="particle" style="--x: 30%; --size: 4px; --duration: 19s; --delay: 3.5s;"></div>
-    <div class="particle" style="--x: 90%; --size: 6px; --duration: 12s; --delay: 6s;"></div>
-    <div class="particle" style="--x: 5%; --size: 5px; --duration: 14s; --delay: 7s;"></div>
-    <div class="particle" style="--x: 60%; --size: 3px; --duration: 20s; --delay: 0.5s;"></div>
-    <div class="particle" style="--x: 40%; --size: 7px; --duration: 16s; --delay: 5.5s;"></div>
-    <div class="particle" style="--x: 15%; --size: 4px; --duration: 11s; --delay: 8s;"></div>
-  </div>
-
-  <!-- Section 1: Hero -->
-  <section class="section hero" id="hero">
-    <div class="hero-content">
-      <p class="hero-subtitle" style="font-family: var(--font-serif); font-size: 1.2rem; letter-spacing: 3px; text-transform: uppercase; color: var(--text-heading); margin-bottom: 10px;">Together with their families</p>
-      <h1 class="hero-names">Koon Hian <span class="ampersand">&amp;</span> Germaine</h1>
-      <p class="hero-date">10 . 10 . 2026</p>
-      <p class="hero-venue" style="font-family: var(--font-serif); font-size: 1.1rem; color: var(--text-heading); margin-top: 8px; font-style: italic;">Pan Pacific Orchard</p>
-    </div>
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <p class="hero-intro">Together with their families</p>
+    <h1 class="hero-names">
+      Koon Hian
+      <span class="hero-ampersand">&</span>
+      Germaine
+    </h1>
+    <div class="divider" style="margin-bottom: 20px;"></div>
+    <p class="hero-date">10 . 10 . 2026</p>
+    <p class="hero-venue">Pan Pacific Orchard</p>
     <div class="scroll-indicator" aria-hidden="true">
       <span>Scroll</span>
       <div class="scroll-chevron"></div>
     </div>
   </section>
 
-  <!-- Section 2: Countdown -->
-  <section class="section countdown-section" id="countdown">
-    <div class="fade-in">
-      <h2 class="section-title">Counting Down To Forever</h2>
-      <div class="countdown" id="countdown-timer">
-        <div class="countdown-item glass-card">
-          <span class="countdown-number" id="cd-days">000</span>
-          <span class="countdown-label">Days</span>
-        </div>
-        <div class="countdown-item glass-card">
-          <span class="countdown-number" id="cd-hours">00</span>
-          <span class="countdown-label">Hours</span>
-        </div>
-        <div class="countdown-item glass-card">
-          <span class="countdown-number" id="cd-minutes">00</span>
-          <span class="countdown-label">Minutes</span>
-        </div>
-        <div class="countdown-item glass-card">
-          <span class="countdown-number" id="cd-seconds">00</span>
-          <span class="countdown-label">Seconds</span>
-        </div>
+  <!-- Countdown -->
+  <div class="section" id="countdown">
+    <h2 class="section-title">Counting Down</h2>
+    <div class="divider"></div>
+    <div class="countdown" id="countdown-timer">
+      <div class="countdown-item">
+        <span class="countdown-number" id="cd-days">000</span>
+        <span class="countdown-label">Days</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-number" id="cd-hours">00</span>
+        <span class="countdown-label">Hours</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-number" id="cd-minutes">00</span>
+        <span class="countdown-label">Minutes</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-number" id="cd-seconds">00</span>
+        <span class="countdown-label">Seconds</span>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- Section 3: Wedding Details -->
-  <section class="section details-section" id="details">
-    <div class="fade-in glass-card details-card">
-      <h2 class="section-title">Wedding Details</h2>
-      <div class="details-grid">
-        <div class="detail-item">
-          <span class="detail-icon">&#128197;</span>
-          <h3 class="detail-heading">Date</h3>
-          <p>Saturday, 10 October 2026</p>
-        </div>
-        <div class="detail-item">
-          <span class="detail-icon">&#127860;</span>
-          <h3 class="detail-heading">Event</h3>
-          <p>Dinner Reception</p>
-        </div>
-        <div class="detail-item">
-          <span class="detail-icon">&#127976;</span>
-          <h3 class="detail-heading">Venue</h3>
-          <p>Pan Pacific Orchard</p>
-          <p class="detail-sub">10 Claymore Rd, Singapore 229540</p>
-        </div>
+  <!-- Wedding Details -->
+  <div class="section" id="details">
+    <h2 class="section-title">Wedding Details</h2>
+    <div class="divider" style="margin-bottom: 40px;"></div>
+    <div class="details-grid">
+      <div class="detail-item">
+        <h3 class="detail-heading">Date</h3>
+        <p>Saturday</p>
+        <p>10 October 2026</p>
+      </div>
+      <div class="detail-item">
+        <h3 class="detail-heading">Event</h3>
+        <p>Dinner Reception</p>
+      </div>
+      <div class="detail-item">
+        <h3 class="detail-heading">Venue</h3>
+        <p>Pan Pacific Orchard</p>
+        <p class="detail-sub">10 Claymore Rd, Singapore 229540</p>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- Section 4: RSVP Form -->
-  <section class="section rsvp-section" id="rsvp">
-    <div class="fade-in glass-card rsvp-card">
+  <!-- RSVP Form -->
+  <div class="rsvp-section" id="rsvp">
+    <div class="rsvp-card">
       <h2 class="section-title">RSVP</h2>
-      <p class="rsvp-subtitle">Kindly respond by 10 September 2026</p>
+      <p class="section-subtitle">Kindly respond by 10 September 2026</p>
 
       <form id="rsvp-form" novalidate>
         <div class="form-group">
           <label for="guest-name">Full Name <span class="required">*</span></label>
-          <input type="text" id="guest-name" name="name" required placeholder="Your full name">
+          <input type="text" id="guest-name" name="name" required placeholder="Your full name" autocomplete="name">
         </div>
 
         <div class="form-group">
@@ -826,7 +647,7 @@
 
         <div class="form-group">
           <label for="message">Message to the Couple</label>
-          <textarea id="message" name="message" rows="4" placeholder="Your warm wishes..."></textarea>
+          <textarea id="message" name="message" rows="3" placeholder="Your warm wishes..."></textarea>
         </div>
 
         <button type="submit" class="submit-btn" id="submit-btn">
@@ -837,58 +658,36 @@
         <p class="form-error hidden" id="form-error">Please fill in all required fields.</p>
       </form>
 
-      <!-- Success message (hidden by default) -->
       <div class="rsvp-success hidden" id="rsvp-success">
-        <div class="success-sparkle">&#10024;</div>
         <h3>Thank You!</h3>
-        <p>Your RSVP has been received. We look forward to celebrating with you!</p>
+        <p>Your RSVP has been received.<br>We look forward to celebrating with you!</p>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- Section 5: Closing -->
-  <section class="section closing-section" id="closing">
-    <div class="fade-in closing-content">
-      <p class="closing-script">We can't wait to celebrate with you</p>
-      <p class="closing-names">Koon Hian &amp; Germaine</p>
-      <p class="closing-date">10 . 10 . 2026</p>
-    </div>
-  </section>
+  <!-- Closing -->
+  <div class="closing" id="closing">
+    <p class="closing-script">We can't wait to celebrate with you</p>
+    <p class="closing-names">Koon Hian & Germaine</p>
+    <p class="closing-date">10 . 10 . 2026</p>
+  </div>
 
   <footer class="footer">
-    <p>With love, K &amp; G</p>
+    <p>With love, K & G</p>
   </footer>
 
   <script>
-    // ---- Generate twinkling stars ----
-    (function generateStars() {
-      const container = document.getElementById('stars');
-      const count = window.innerWidth < 768 ? 35 : 70;
-      for (let i = 0; i < count; i++) {
-        const star = document.createElement('div');
-        star.classList.add('star');
-        const size = Math.random() * 3 + 1;
-        star.style.width = size + 'px';
-        star.style.height = size + 'px';
-        star.style.top = Math.random() * 100 + '%';
-        star.style.left = Math.random() * 100 + '%';
-        star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
-        star.style.setProperty('--delay', (Math.random() * 5) + 's');
-        container.appendChild(star);
-      }
-    })();
-
     // ---- Countdown Timer ----
     (function startCountdown() {
-      const weddingDate = new Date('2026-10-10T18:00:00+08:00').getTime();
-      const daysEl = document.getElementById('cd-days');
-      const hoursEl = document.getElementById('cd-hours');
-      const minutesEl = document.getElementById('cd-minutes');
-      const secondsEl = document.getElementById('cd-seconds');
+      var weddingDate = new Date('2026-10-10T18:00:00+08:00').getTime();
+      var daysEl = document.getElementById('cd-days');
+      var hoursEl = document.getElementById('cd-hours');
+      var minutesEl = document.getElementById('cd-minutes');
+      var secondsEl = document.getElementById('cd-seconds');
 
       function update() {
-        const now = Date.now();
-        const diff = weddingDate - now;
+        var now = Date.now();
+        var diff = weddingDate - now;
 
         if (diff <= 0) {
           daysEl.textContent = '0';
@@ -898,20 +697,10 @@
           return;
         }
 
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-        daysEl.textContent = days;
-        hoursEl.textContent = String(hours).padStart(2, '0');
-        minutesEl.textContent = String(minutes).padStart(2, '0');
-
-        if (secondsEl.textContent !== String(seconds).padStart(2, '0')) {
-          secondsEl.textContent = String(seconds).padStart(2, '0');
-          secondsEl.classList.add('pulse');
-          setTimeout(() => secondsEl.classList.remove('pulse'), 300);
-        }
+        daysEl.textContent = Math.floor(diff / (1000 * 60 * 60 * 24));
+        hoursEl.textContent = String(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+        minutesEl.textContent = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+        secondsEl.textContent = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
       }
 
       update();
@@ -919,20 +708,18 @@
     })();
 
     // ---- Google Apps Script URL ----
-    // REPLACE THIS with your deployed Google Apps Script web app URL
-    const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+    var GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
 
     // ---- RSVP Form Logic ----
     (function setupForm() {
-      const form = document.getElementById('rsvp-form');
-      const attendingFields = document.getElementById('attending-fields');
-      const submitBtn = document.getElementById('submit-btn');
-      const btnText = submitBtn.querySelector('.btn-text');
-      const btnLoading = submitBtn.querySelector('.btn-loading');
-      const formError = document.getElementById('form-error');
-      const successDiv = document.getElementById('rsvp-success');
+      var form = document.getElementById('rsvp-form');
+      var attendingFields = document.getElementById('attending-fields');
+      var submitBtn = document.getElementById('submit-btn');
+      var btnText = submitBtn.querySelector('.btn-text');
+      var btnLoading = submitBtn.querySelector('.btn-loading');
+      var formError = document.getElementById('form-error');
+      var successDiv = document.getElementById('rsvp-success');
 
-      // Show/hide conditional fields based on attending selection
       document.querySelectorAll('input[name="attending"]').forEach(function(radio) {
         radio.addEventListener('change', function() {
           if (this.value === 'Yes') {
@@ -943,40 +730,25 @@
         });
       });
 
-      // Form submission
       form.addEventListener('submit', function(e) {
         e.preventDefault();
         formError.classList.add('hidden');
 
-        // Validate required fields
         var name = document.getElementById('guest-name').value.trim();
         var side = form.querySelector('input[name="side"]:checked');
         var attending = form.querySelector('input[name="attending"]:checked');
 
-        // Clear previous errors
         form.querySelectorAll('.error').forEach(function(el) {
           el.classList.remove('error');
         });
 
         var hasError = false;
+        if (!name) { document.getElementById('guest-name').classList.add('error'); hasError = true; }
+        if (!side) { hasError = true; }
+        if (!attending) { hasError = true; }
 
-        if (!name) {
-          document.getElementById('guest-name').classList.add('error');
-          hasError = true;
-        }
-        if (!side) {
-          hasError = true;
-        }
-        if (!attending) {
-          hasError = true;
-        }
+        if (hasError) { formError.classList.remove('hidden'); return; }
 
-        if (hasError) {
-          formError.classList.remove('hidden');
-          return;
-        }
-
-        // Gather form data
         var data = {
           name: name,
           side: side.value,
@@ -987,19 +759,16 @@
           message: document.getElementById('message').value.trim()
         };
 
-        // Disable button, show loading
         submitBtn.disabled = true;
         btnText.classList.add('hidden');
         btnLoading.classList.remove('hidden');
 
-        // Submit to Google Apps Script
         fetch(GOOGLE_SCRIPT_URL, {
           method: 'POST',
           mode: 'no-cors',
           body: new URLSearchParams(data)
         })
         .then(function() {
-          // no-cors means we can't read the response, show success optimistically
           form.classList.add('hidden');
           successDiv.classList.remove('hidden');
         })
@@ -1010,41 +779,6 @@
           formError.textContent = 'Something went wrong. Please try again.';
           formError.classList.remove('hidden');
         });
-      });
-    })();
-
-    // ---- Scroll Entrance Animations (Intersection Observer) ----
-    (function setupScrollAnimations() {
-      var targets = document.querySelectorAll('.fade-in');
-      if ('IntersectionObserver' in window) {
-        var observer = new IntersectionObserver(function(entries) {
-          entries.forEach(function(entry) {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('visible');
-              observer.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.15 });
-
-        targets.forEach(function(el) { observer.observe(el); });
-      } else {
-        // Fallback: show everything
-        targets.forEach(function(el) { el.classList.add('visible'); });
-      }
-    })();
-
-    // ---- Parallax Background ----
-    (function setupParallax() {
-      var ticking = false;
-      window.addEventListener('scroll', function() {
-        if (!ticking) {
-          requestAnimationFrame(function() {
-            var scrollY = window.pageYOffset;
-            document.body.style.backgroundPositionY = (scrollY * 0.3) + 'px';
-            ticking = false;
-          });
-          ticking = true;
-        }
       });
     })();
   </script>
