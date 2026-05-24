@@ -634,6 +634,30 @@
       margin-top: 12px;
     }
 
+    /* Doro parade */
+    .doro-parade {
+      overflow: hidden;
+      padding: 20px 0;
+      position: relative;
+    }
+
+    .doro-parade-track {
+      display: flex;
+      gap: 40px;
+      animation: parade-scroll 15s linear infinite;
+      width: max-content;
+    }
+
+    .doro-parade-track img {
+      width: 50px;
+      flex-shrink: 0;
+    }
+
+    @keyframes parade-scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
     .footer {
       text-align: center;
       padding: 20px;
@@ -875,6 +899,28 @@
     <p class="closing-script">We can't wait to celebrate with you</p>
     <p class="closing-names">Koon Hian & Germaine</p>
     <p class="closing-date">10 . 10 . 2026</p>
+  </div>
+
+  <div class="doro-parade" aria-hidden="true">
+    <div class="doro-parade-track">
+      <img src="assets/doro/doro-run-right.gif" alt="">
+      <img src="assets/doro/doro-orange.png" alt="">
+      <img src="assets/doro/doro-happy.png" alt="">
+      <img src="assets/doro/doro-sit.png" alt="">
+      <img src="assets/doro/doro-dance.gif" alt="">
+      <img src="assets/doro/doro-point.png" alt="">
+      <img src="assets/doro/doro-peek.png" alt="">
+      <img src="assets/doro/doro-wave.png" alt="">
+      <!-- Duplicate for seamless loop -->
+      <img src="assets/doro/doro-run-right.gif" alt="">
+      <img src="assets/doro/doro-orange.png" alt="">
+      <img src="assets/doro/doro-happy.png" alt="">
+      <img src="assets/doro/doro-sit.png" alt="">
+      <img src="assets/doro/doro-dance.gif" alt="">
+      <img src="assets/doro/doro-point.png" alt="">
+      <img src="assets/doro/doro-peek.png" alt="">
+      <img src="assets/doro/doro-wave.png" alt="">
+    </div>
   </div>
 
   <footer class="footer">
