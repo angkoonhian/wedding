@@ -236,15 +236,35 @@
       justify-content: center;
       width: 100px;
       height: 100px;
-      background: var(--card-bg);
+      background: rgba(255, 255, 255, 0.5);
       border: 1px solid var(--card-border);
       border-radius: 12px;
+      position: relative;
     }
+
+    .countdown-doro {
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      pointer-events: none;
+      transition: transform 0.2s ease;
+    }
+
+    .countdown-doro.bounce {
+      transform: translateX(-50%) translateY(-5px);
+    }
+
+    .countdown-item:nth-child(1) .countdown-doro { transform: translateX(-50%) rotate(-3deg); }
+    .countdown-item:nth-child(2) .countdown-doro { transform: translateX(-50%) rotate(4deg); }
+    .countdown-item:nth-child(3) .countdown-doro { transform: translateX(-50%) rotate(-5deg); }
+    .countdown-item:nth-child(4) .countdown-doro { transform: translateX(-50%) rotate(2deg); }
 
     .countdown-number {
       font-family: var(--font-heading);
       font-size: 2.2rem;
-      font-weight: 600;
+      font-weight: 500;
       color: var(--heading-color);
       line-height: 1;
     }
@@ -599,18 +619,22 @@
     <div class="divider"></div>
     <div class="countdown" id="countdown-timer">
       <div class="countdown-item">
+        <img src="assets/doro/doro-sit.png" alt="" class="countdown-doro" aria-hidden="true">
         <span class="countdown-number" id="cd-days">000</span>
         <span class="countdown-label">Days</span>
       </div>
       <div class="countdown-item">
+        <img src="assets/doro/doro-sit.png" alt="" class="countdown-doro" aria-hidden="true">
         <span class="countdown-number" id="cd-hours">00</span>
         <span class="countdown-label">Hours</span>
       </div>
       <div class="countdown-item">
+        <img src="assets/doro/doro-sit.png" alt="" class="countdown-doro" aria-hidden="true">
         <span class="countdown-number" id="cd-minutes">00</span>
         <span class="countdown-label">Minutes</span>
       </div>
       <div class="countdown-item">
+        <img src="assets/doro/doro-sit.png" alt="" class="countdown-doro" aria-hidden="true">
         <span class="countdown-number" id="cd-seconds">00</span>
         <span class="countdown-label">Seconds</span>
       </div>
@@ -746,6 +770,15 @@
       var hoursEl = document.getElementById('cd-hours');
       var minutesEl = document.getElementById('cd-minutes');
       var secondsEl = document.getElementById('cd-seconds');
+      var prev = {};
+
+      function bounceDoro(el) {
+        var doro = el.parentElement.querySelector('.countdown-doro');
+        if (doro) {
+          doro.classList.add('bounce');
+          setTimeout(function() { doro.classList.remove('bounce'); }, 200);
+        }
+      }
 
       function update() {
         var now = Date.now();
@@ -759,10 +792,17 @@
           return;
         }
 
-        daysEl.textContent = Math.floor(diff / (1000 * 60 * 60 * 24));
-        hoursEl.textContent = String(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
-        minutesEl.textContent = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
-        secondsEl.textContent = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
+        var d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        var h = String(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+        var m = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+        var s = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
+
+        if (prev.d !== d) { daysEl.textContent = d; bounceDoro(daysEl); }
+        if (prev.h !== h) { hoursEl.textContent = h; bounceDoro(hoursEl); }
+        if (prev.m !== m) { minutesEl.textContent = m; bounceDoro(minutesEl); }
+        if (prev.s !== s) { secondsEl.textContent = s; bounceDoro(secondsEl); }
+
+        prev = { d: d, h: h, m: m, s: s };
       }
 
       update();
