@@ -66,6 +66,7 @@
       text-align: center;
       padding: 60px 20px;
       position: relative;
+      z-index: 1;
     }
 
     .hero-names {
@@ -201,6 +202,8 @@
       max-width: 700px;
       margin: 0 auto;
       text-align: center;
+      position: relative;
+      z-index: 1;
     }
 
     .section-title {
@@ -346,6 +349,7 @@
       max-width: 520px;
       margin: 0 auto;
       position: relative;
+      z-index: 1;
     }
 
     .rsvp-card {
@@ -608,6 +612,8 @@
     .closing {
       padding: 80px 20px 40px;
       text-align: center;
+      position: relative;
+      z-index: 1;
     }
 
     .closing-script {
@@ -666,6 +672,99 @@
       color: var(--text-light);
     }
 
+    /* ---- Floating Oranges ---- */
+    .floating-oranges {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .floating-orange {
+      position: absolute;
+      bottom: -40px;
+      width: 20px;
+      height: 20px;
+      background: var(--orange);
+      border-radius: 50%;
+      opacity: 0.4;
+      animation: orange-float linear infinite;
+    }
+
+    .floating-orange::after {
+      content: '';
+      position: absolute;
+      top: -3px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 4px;
+      background: #6B8040;
+      border-radius: 50% 50% 50% 0;
+    }
+
+    @keyframes orange-float {
+      0% { transform: translateY(0) rotate(0deg) translateX(0); opacity: 0.4; }
+      10% { opacity: 0.5; }
+      90% { opacity: 0.3; }
+      100% { transform: translateY(-110vh) rotate(360deg) translateX(30px); opacity: 0; }
+    }
+
+    /* ---- Random Doro Spawner ---- */
+    .spawned-doro {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9998;
+    }
+
+    .spawned-doro--ltr {
+      animation: doro-run-ltr linear forwards;
+    }
+
+    .spawned-doro--rtl {
+      animation: doro-run-rtl linear forwards;
+    }
+
+    @keyframes doro-run-ltr {
+      from { transform: translateX(-100px); }
+      to { transform: translateX(calc(100vw + 100px)); }
+    }
+
+    @keyframes doro-run-rtl {
+      from { transform: translateX(calc(100vw + 100px)) scaleX(-1); }
+      to { transform: translateX(-100px) scaleX(-1); }
+    }
+
+    /* ---- Cursor Trail ---- */
+    .cursor-doro {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9997;
+      animation: cursor-fade 0.8s ease-out forwards;
+    }
+
+    @keyframes cursor-fade {
+      from { opacity: 0.7; transform: scale(1); }
+      to { opacity: 0; transform: scale(0.3); }
+    }
+
+    /* ---- Click Spawn ---- */
+    .click-doro {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9997;
+      animation: click-pop 1s ease-out forwards;
+    }
+
+    @keyframes click-pop {
+      0% { opacity: 1; transform: translate(0, 0) scale(1); }
+      100% { opacity: 0; transform: translate(var(--dx), -60px) scale(0.5); }
+    }
+
     /* ---- Responsive ---- */
     @media (max-width: 768px) {
       .countdown {
@@ -716,6 +815,25 @@
   </style>
 </head>
 <body>
+
+  <!-- Floating Oranges -->
+  <div class="floating-oranges" aria-hidden="true">
+    <div class="floating-orange" style="left:5%;width:18px;height:18px;animation-duration:12s;animation-delay:0s;"></div>
+    <div class="floating-orange" style="left:12%;width:24px;height:24px;animation-duration:16s;animation-delay:2s;"></div>
+    <div class="floating-orange" style="left:20%;width:15px;height:15px;animation-duration:10s;animation-delay:4s;"></div>
+    <div class="floating-orange" style="left:28%;width:22px;height:22px;animation-duration:14s;animation-delay:1s;"></div>
+    <div class="floating-orange" style="left:35%;width:18px;height:18px;animation-duration:18s;animation-delay:6s;"></div>
+    <div class="floating-orange" style="left:42%;width:28px;height:28px;animation-duration:13s;animation-delay:3s;"></div>
+    <div class="floating-orange" style="left:50%;width:16px;height:16px;animation-duration:11s;animation-delay:5s;"></div>
+    <div class="floating-orange" style="left:58%;width:20px;height:20px;animation-duration:15s;animation-delay:0.5s;"></div>
+    <div class="floating-orange" style="left:65%;width:25px;height:25px;animation-duration:17s;animation-delay:7s;"></div>
+    <div class="floating-orange" style="left:72%;width:14px;height:14px;animation-duration:9s;animation-delay:2.5s;"></div>
+    <div class="floating-orange" style="left:78%;width:22px;height:22px;animation-duration:14s;animation-delay:4.5s;"></div>
+    <div class="floating-orange" style="left:85%;width:18px;height:18px;animation-duration:12s;animation-delay:1.5s;"></div>
+    <div class="floating-orange" style="left:92%;width:20px;height:20px;animation-duration:16s;animation-delay:8s;"></div>
+    <div class="floating-orange" style="left:8%;width:30px;height:30px;animation-duration:20s;animation-delay:9s;"></div>
+    <div class="floating-orange" style="left:45%;width:12px;height:12px;animation-duration:8s;animation-delay:3.5s;"></div>
+  </div>
 
   <!-- Hero -->
   <section class="hero" id="hero">
