@@ -345,19 +345,32 @@
       padding: 80px 20px;
       max-width: 520px;
       margin: 0 auto;
+      position: relative;
     }
 
     .rsvp-card {
       background: var(--card-bg);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       border: 1px solid var(--card-border);
       border-radius: 16px;
       padding: 40px;
       text-align: left;
+      position: relative;
     }
 
     .rsvp-card .section-title,
     .rsvp-card .section-subtitle {
       text-align: center;
+    }
+
+    .rsvp-doro {
+      position: absolute;
+      right: -90px;
+      top: 80px;
+      width: 80px;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
     }
 
     .form-group {
@@ -366,15 +379,15 @@
 
     .form-group label {
       display: block;
-      font-family: var(--font-heading);
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--heading-color);
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: #7A6A7A;
       margin-bottom: 6px;
     }
 
     .required {
-      color: var(--btn-hover);
+      color: var(--heading-color);
     }
 
     .form-group input[type="text"],
@@ -399,7 +412,7 @@
     }
 
     .form-group input.error {
-      border-color: #D4796A;
+      border-color: var(--error-color);
     }
 
     /* Radio buttons */
@@ -430,7 +443,7 @@
     .radio-custom {
       width: 18px;
       height: 18px;
-      border: 1.5px solid var(--card-border);
+      border: 1.5px solid var(--accent-purple);
       border-radius: 50%;
       position: relative;
       transition: border-color 0.3s;
@@ -460,7 +473,7 @@
     /* Conditional fields */
     .attending-fields {
       transition: opacity 0.3s ease, max-height 0.3s ease;
-      max-height: 400px;
+      max-height: 800px;
       opacity: 1;
       overflow: hidden;
     }
@@ -471,17 +484,30 @@
       pointer-events: none;
     }
 
+    /* Dynamic guest name fields */
+    .guest-name-field {
+      animation: slide-in 0.3s ease-out;
+    }
+
+    @keyframes slide-in {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
     /* Submit button */
     .submit-btn {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
       width: 100%;
       padding: 13px;
       font-family: var(--font-heading);
       font-size: 1.05rem;
-      font-weight: 600;
+      font-weight: 500;
       letter-spacing: 1px;
       color: white;
-      background: var(--heading-color);
+      background: var(--btn-bg);
       border: none;
       border-radius: 8px;
       cursor: pointer;
@@ -497,9 +523,15 @@
       cursor: not-allowed;
     }
 
+    .btn-orange {
+      width: 18px;
+      height: 18px;
+      pointer-events: none;
+    }
+
     .form-error {
       text-align: center;
-      color: #C07060;
+      color: var(--error-color);
       font-size: 0.85rem;
       margin-top: 12px;
     }
@@ -526,6 +558,50 @@
       font-family: var(--font-heading);
       font-size: 1.05rem;
       color: var(--text-body);
+      margin-bottom: 20px;
+    }
+
+    .doro-dance-row {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .doro-dance-row img {
+      width: 80px;
+    }
+
+    /* Orange burst animation */
+    .burst-orange {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--orange);
+      pointer-events: none;
+      z-index: 9999;
+      animation: burst 1.5s ease-out forwards;
+    }
+
+    @keyframes burst {
+      0% { transform: translate(0, 0) scale(1); opacity: 1; }
+      100% { transform: translate(var(--bx), var(--by)) scale(0); opacity: 0; }
+    }
+
+    /* Confetti */
+    .confetti {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      pointer-events: none;
+      z-index: 9999;
+      animation: confetti-fall 3s ease-in forwards;
+    }
+
+    @keyframes confetti-fall {
+      0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
     }
 
     /* ---- Closing ---- */
@@ -697,7 +773,9 @@
   <div class="rsvp-section" id="rsvp">
     <div class="rsvp-card">
       <h2 class="section-title">RSVP</h2>
-      <p class="section-subtitle">Kindly respond by 10 September 2026</p>
+      <p class="section-subtitle">Kindly respond by 31 August 2026</p>
+
+      <img src="assets/doro/doro-peek.png" alt="" class="rsvp-doro" id="rsvp-doro" aria-hidden="true">
 
       <form id="rsvp-form" novalidate>
         <div class="form-group">
@@ -750,6 +828,8 @@
             </select>
           </div>
 
+          <div id="guest-names-container"></div>
+
           <div class="form-group">
             <label for="dietary">Dietary Restrictions</label>
             <input type="text" id="dietary" name="dietary" placeholder="e.g. Vegetarian, No shellfish">
@@ -767,8 +847,10 @@
         </div>
 
         <button type="submit" class="submit-btn" id="submit-btn">
+          <img src="assets/doro/doro-orange.png" alt="" class="btn-orange" aria-hidden="true">
           <span class="btn-text">Send RSVP</span>
           <span class="btn-loading hidden">Sending...</span>
+          <img src="assets/doro/doro-orange.png" alt="" class="btn-orange" aria-hidden="true">
         </button>
 
         <p class="form-error hidden" id="form-error">Please fill in all required fields.</p>
@@ -777,6 +859,13 @@
       <div class="rsvp-success hidden" id="rsvp-success">
         <h3>Thank You!</h3>
         <p>Your RSVP has been received.<br>We look forward to celebrating with you!</p>
+        <div class="doro-dance-row">
+          <img src="assets/doro/doro-dance.gif" alt="" aria-hidden="true">
+          <img src="assets/doro/doro-happy.png" alt="" aria-hidden="true">
+          <img src="assets/doro/doro-dance.gif" alt="" aria-hidden="true">
+          <img src="assets/doro/doro-happy.png" alt="" aria-hidden="true">
+          <img src="assets/doro/doro-dance.gif" alt="" aria-hidden="true">
+        </div>
       </div>
     </div>
   </div>
@@ -846,21 +935,74 @@
     (function setupForm() {
       var form = document.getElementById('rsvp-form');
       var attendingFields = document.getElementById('attending-fields');
+      var guestNamesContainer = document.getElementById('guest-names-container');
+      var additionalGuestsSelect = document.getElementById('additional-guests');
       var submitBtn = document.getElementById('submit-btn');
       var btnText = submitBtn.querySelector('.btn-text');
       var btnLoading = submitBtn.querySelector('.btn-loading');
       var formError = document.getElementById('form-error');
       var successDiv = document.getElementById('rsvp-success');
+      var rsvpDoro = document.getElementById('rsvp-doro');
 
+      // Doro reactions for attending choice
       document.querySelectorAll('input[name="attending"]').forEach(function(radio) {
         radio.addEventListener('change', function() {
           if (this.value === 'Yes') {
             attendingFields.classList.remove('hidden');
+            rsvpDoro.src = 'assets/doro/doro-happy.png';
           } else {
             attendingFields.classList.add('hidden');
+            rsvpDoro.src = 'assets/doro/doro-sad.png';
           }
         });
       });
+
+      // Dynamic guest name fields
+      additionalGuestsSelect.addEventListener('change', function() {
+        var count = parseInt(this.value, 10);
+        guestNamesContainer.innerHTML = '';
+        for (var i = 1; i <= count; i++) {
+          var div = document.createElement('div');
+          div.className = 'form-group guest-name-field';
+          div.innerHTML = '<label for="guest-name-' + i + '">Guest ' + i + ' Name</label>' +
+            '<input type="text" id="guest-name-' + i + '" placeholder="Guest ' + i + ' full name">';
+          guestNamesContainer.appendChild(div);
+        }
+      });
+
+      // Orange burst celebration
+      function celebrate() {
+        var cx = window.innerWidth / 2;
+        var cy = window.innerHeight / 2;
+        for (var i = 0; i < 25; i++) {
+          var el = document.createElement('div');
+          el.className = 'burst-orange';
+          var angle = (Math.PI * 2 * i) / 25;
+          var dist = 100 + Math.random() * 200;
+          el.style.left = cx + 'px';
+          el.style.top = cy + 'px';
+          el.style.setProperty('--bx', Math.cos(angle) * dist + 'px');
+          el.style.setProperty('--by', Math.sin(angle) * dist + 'px');
+          el.style.width = (10 + Math.random() * 15) + 'px';
+          el.style.height = el.style.width;
+          el.style.animationDelay = (Math.random() * 0.3) + 's';
+          document.body.appendChild(el);
+          setTimeout(function(e) { e.remove(); }.bind(null, el), 2000);
+        }
+        // Confetti
+        var colors = ['#D4B8D8', '#E8B8A8', '#FFA040', '#F3E8FF', '#9B72A8'];
+        for (var j = 0; j < 40; j++) {
+          var c = document.createElement('div');
+          c.className = 'confetti';
+          c.style.left = (Math.random() * 100) + 'vw';
+          c.style.top = '-10px';
+          c.style.background = colors[j % colors.length];
+          c.style.animationDelay = (Math.random() * 1) + 's';
+          c.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+          document.body.appendChild(c);
+          setTimeout(function(e) { e.remove(); }.bind(null, c), 4000);
+        }
+      }
 
       form.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -881,11 +1023,20 @@
 
         if (hasError) { formError.classList.remove('hidden'); return; }
 
+        // Collect guest names
+        var guestNames = [];
+        var guestCount = attending.value === 'Yes' ? parseInt(additionalGuestsSelect.value, 10) : 0;
+        for (var i = 1; i <= guestCount; i++) {
+          var input = document.getElementById('guest-name-' + i);
+          if (input) guestNames.push(input.value.trim());
+        }
+
         var data = {
           name: name,
           side: side.value,
           attending: attending.value,
-          additionalGuests: attending.value === 'Yes' ? document.getElementById('additional-guests').value : '0',
+          additionalGuests: attending.value === 'Yes' ? additionalGuestsSelect.value : '0',
+          guestNames: guestNames.join(' | '),
           dietary: attending.value === 'Yes' ? document.getElementById('dietary').value.trim() : '',
           specialRequests: attending.value === 'Yes' ? document.getElementById('special-requests').value.trim() : '',
           message: document.getElementById('message').value.trim()
@@ -903,6 +1054,7 @@
         .then(function() {
           form.classList.add('hidden');
           successDiv.classList.remove('hidden');
+          celebrate();
         })
         .catch(function() {
           submitBtn.disabled = false;
