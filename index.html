@@ -65,7 +65,7 @@
       justify-content: center;
       text-align: center;
       padding: 60px 20px;
-      background: transparent;
+      position: relative;
     }
 
     .hero-names {
@@ -82,36 +82,84 @@
       display: block;
       font-size: 0.5em;
       margin: 4px 0;
-      opacity: 0.6;
+      opacity: 0.5;
+      font-style: italic;
     }
 
     .hero-date {
       font-family: var(--font-heading);
       font-size: clamp(1rem, 2.5vw, 1.4rem);
       color: var(--text-light);
-      letter-spacing: 6px;
-      font-weight: 300;
+      letter-spacing: 4px;
+      font-weight: 400;
       margin-bottom: 12px;
     }
 
     .hero-venue {
       font-family: var(--font-body);
       font-size: 0.9rem;
-      color: var(--text-light);
+      color: var(--text-venue);
       font-weight: 300;
       letter-spacing: 1px;
     }
 
     .hero-intro {
       font-family: var(--font-body);
-      font-size: 0.8rem;
+      font-size: 0.6rem;
       letter-spacing: 4px;
       text-transform: uppercase;
-      color: var(--text-light);
+      color: var(--text-label);
       margin-bottom: 24px;
       font-weight: 300;
     }
 
+    /* Hero Doro placements */
+    .hero-doro {
+      position: absolute;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .hero-doro--peek {
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      animation: doro-bounce 2s ease-in-out infinite;
+    }
+
+    .hero-doro--hang {
+      top: 20px;
+      right: 30px;
+      width: 80px;
+      animation: doro-swing 3s ease-in-out infinite;
+      transform-origin: top center;
+    }
+
+    .hero-doro--orange {
+      bottom: 60px;
+      left: 30px;
+      width: 90px;
+      animation: doro-float 4s ease-in-out infinite;
+    }
+
+    @keyframes doro-bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-8px); }
+    }
+
+    @keyframes doro-swing {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(5deg); }
+      75% { transform: rotate(-5deg); }
+    }
+
+    @keyframes doro-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* Scroll indicator */
     .scroll-indicator {
       position: absolute;
       bottom: 40px;
@@ -121,6 +169,7 @@
       flex-direction: column;
       align-items: center;
       gap: 6px;
+      animation: doro-bounce 2s ease-in-out infinite;
     }
 
     .scroll-indicator span {
@@ -132,9 +181,14 @@
       opacity: 0.5;
     }
 
+    .scroll-doro {
+      width: 30px;
+      opacity: 0.6;
+    }
+
     .scroll-chevron {
-      width: 16px;
-      height: 16px;
+      width: 12px;
+      height: 12px;
       border-right: 1.5px solid var(--text-light);
       border-bottom: 1.5px solid var(--text-light);
       transform: rotate(45deg);
@@ -528,8 +582,13 @@
     <div class="divider" style="margin-bottom: 20px;"></div>
     <p class="hero-date">10 . 10 . 2026</p>
     <p class="hero-venue">Pan Pacific Orchard</p>
+
+    <img src="assets/doro/doro-peek.png" alt="" class="hero-doro hero-doro--peek" aria-hidden="true">
+    <img src="assets/doro/doro-hang.png" alt="" class="hero-doro hero-doro--hang" aria-hidden="true">
+    <img src="assets/doro/doro-orange.png" alt="" class="hero-doro hero-doro--orange" aria-hidden="true">
+
     <div class="scroll-indicator" aria-hidden="true">
-      <span>Scroll</span>
+      <img src="assets/doro/doro-sit.png" alt="" class="scroll-doro">
       <div class="scroll-chevron"></div>
     </div>
   </section>
