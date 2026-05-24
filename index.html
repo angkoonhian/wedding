@@ -1112,11 +1112,19 @@
 
         <div id="attending-fields" class="attending-fields hidden">
           <div class="form-group">
-            <label for="additional-guests">Number of Additional Guests</label>
-            <select id="additional-guests" name="additionalGuests">
-              <option value="0">0</option>
-              <option value="1">1</option>
-            </select>
+            <label>Bringing a Plus One?</label>
+            <div class="radio-group">
+              <label class="radio-label">
+                <input type="radio" name="plusone" value="0" checked>
+                <span class="radio-custom"></span>
+                Just Me
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="plusone" value="1">
+                <span class="radio-custom"></span>
+                +1 Guest
+              </label>
+            </div>
           </div>
 
           <div id="guest-names-container"></div>
@@ -1249,7 +1257,7 @@
       var form = document.getElementById('rsvp-form');
       var attendingFields = document.getElementById('attending-fields');
       var guestNamesContainer = document.getElementById('guest-names-container');
-      var additionalGuestsSelect = document.getElementById('additional-guests');
+      var plusOneRadios = document.querySelectorAll('input[name="plusone"]');
       var submitBtn = document.getElementById('submit-btn');
       var btnText = submitBtn.querySelector('.btn-text');
       var btnLoading = submitBtn.querySelector('.btn-loading');
@@ -1270,17 +1278,23 @@
         });
       });
 
-      // Dynamic guest name fields
-      additionalGuestsSelect.addEventListener('change', function() {
-        var count = parseInt(this.value, 10);
-        guestNamesContainer.innerHTML = '';
-        for (var i = 1; i <= count; i++) {
-          var div = document.createElement('div');
-          div.className = 'form-group guest-name-field';
-          div.innerHTML = '<label for="guest-name-' + i + '">Guest ' + i + ' Name</label>' +
-            '<input type="text" id="guest-name-' + i + '" placeholder="Guest ' + i + ' full name">';
-          guestNamesContainer.appendChild(div);
-        }
+      function getPlusOneValue() {
+        var checked = document.querySelector('input[name="plusone"]:checked');
+        return checked ? parseInt(checked.value, 10) : 0;
+      }
+
+      plusOneRadios.forEach(function(radio) {
+        radio.addEventListener('change', function() {
+          var count = getPlusOneValue();
+          guestNamesContainer.innerHTML = '';
+          for (var i = 1; i <= count; i++) {
+            var div = document.createElement('div');
+            div.className = 'form-group guest-name-field';
+            div.innerHTML = '<label for="guest-name-' + i + '">Guest Name</label>' +
+              '<input type="text" id="guest-name-' + i + '" placeholder="Your guest\'s full name">';
+            guestNamesContainer.appendChild(div);
+          }
+        });
       });
 
       // Orange burst celebration
@@ -1338,7 +1352,7 @@
 
         // Collect guest names
         var guestNames = [];
-        var guestCount = attending.value === 'Yes' ? parseInt(additionalGuestsSelect.value, 10) : 0;
+        var guestCount = attending.value === 'Yes' ? getPlusOneValue() : 0;
         for (var i = 1; i <= guestCount; i++) {
           var input = document.getElementById('guest-name-' + i);
           if (input) guestNames.push(input.value.trim());
@@ -1348,7 +1362,7 @@
           name: name,
           side: side.value,
           attending: attending.value,
-          additionalGuests: attending.value === 'Yes' ? additionalGuestsSelect.value : '0',
+          additionalGuests: attending.value === 'Yes' ? String(getPlusOneValue()) : '0',
           guestNames: guestNames.join(' | '),
           dietary: attending.value === 'Yes' ? document.getElementById('dietary').value.trim() : '',
           specialRequests: attending.value === 'Yes' ? document.getElementById('special-requests').value.trim() : '',
