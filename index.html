@@ -36,6 +36,7 @@
 
     html {
       scroll-behavior: smooth;
+      overflow-x: hidden;
     }
 
     body {
@@ -727,6 +728,7 @@
 
     .spawned-doro--rtl {
       animation: doro-run-rtl linear forwards;
+      scale: -1 1;
     }
 
     @keyframes doro-run-ltr {
@@ -735,8 +737,8 @@
     }
 
     @keyframes doro-run-rtl {
-      from { transform: translateX(calc(100vw + 100px)) scaleX(-1); }
-      to { transform: translateX(-100px) scaleX(-1); }
+      from { transform: translateX(calc(100vw + 100px)); }
+      to { transform: translateX(-100px); }
     }
 
     /* ---- Cursor Trail ---- */
@@ -796,8 +798,7 @@
       }
 
       .details-doro--point {
-        right: -50px;
-        width: 50px;
+        display: none;
       }
 
       .details-doro--peek {
@@ -809,8 +810,7 @@
       }
 
       .rsvp-doro {
-        right: -60px;
-        width: 50px;
+        display: none;
       }
 
       .hero-doro--hang {
@@ -1288,7 +1288,6 @@
       var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (reducedMotion) return;
 
-      var runImages = ['assets/doro/doro-run-right.gif', 'assets/doro/doro-run-left.gif'];
       var activeCount = 0;
       var maxActive = 3;
 
@@ -1298,7 +1297,7 @@
 
         var img = document.createElement('img');
         var ltr = Math.random() > 0.5;
-        img.src = runImages[ltr ? 0 : 1];
+        img.src = 'assets/doro/doro-run-right.gif';
         img.className = 'spawned-doro ' + (ltr ? 'spawned-doro--ltr' : 'spawned-doro--rtl');
         img.style.top = (Math.random() * 80 + 10) + 'vh';
         img.style.width = (50 + Math.random() * 30) + 'px';
