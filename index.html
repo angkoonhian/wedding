@@ -279,6 +279,10 @@
     }
 
     /* ---- Details ---- */
+    .details-wrapper {
+      position: relative;
+    }
+
     .details-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -294,9 +298,9 @@
     }
 
     .detail-heading {
-      font-family: var(--font-heading);
-      font-size: 0.85rem;
-      font-weight: 600;
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 400;
       color: var(--heading-color);
       letter-spacing: 2px;
       text-transform: uppercase;
@@ -310,8 +314,30 @@
     }
 
     .detail-sub {
+      font-family: var(--font-body) !important;
       font-size: 0.85rem !important;
       color: var(--text-light) !important;
+      font-weight: 300 !important;
+    }
+
+    .details-doro {
+      position: absolute;
+      pointer-events: none;
+    }
+
+    .details-doro--point {
+      right: -80px;
+      bottom: 0;
+      width: 80px;
+      animation: doro-float 3s ease-in-out infinite;
+    }
+
+    .details-doro--peek {
+      left: -60px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 60px;
+      animation: doro-bounce 2.5s ease-in-out infinite;
     }
 
     /* ---- RSVP Form ---- */
@@ -645,21 +671,25 @@
   <div class="section" id="details">
     <h2 class="section-title">Wedding Details</h2>
     <div class="divider" style="margin-bottom: 40px;"></div>
-    <div class="details-grid">
-      <div class="detail-item">
-        <h3 class="detail-heading">Date</h3>
-        <p>Saturday</p>
-        <p>10 October 2026</p>
+    <div class="details-wrapper">
+      <div class="details-grid">
+        <div class="detail-item">
+          <h3 class="detail-heading">Date</h3>
+          <p>Saturday</p>
+          <p>10 October 2026</p>
+        </div>
+        <div class="detail-item">
+          <h3 class="detail-heading">Event</h3>
+          <p>Dinner Reception</p>
+        </div>
+        <div class="detail-item">
+          <h3 class="detail-heading">Venue</h3>
+          <p>Pan Pacific Orchard</p>
+          <p class="detail-sub">10 Claymore Rd, Singapore 229540</p>
+        </div>
       </div>
-      <div class="detail-item">
-        <h3 class="detail-heading">Event</h3>
-        <p>Dinner Reception</p>
-      </div>
-      <div class="detail-item">
-        <h3 class="detail-heading">Venue</h3>
-        <p>Pan Pacific Orchard</p>
-        <p class="detail-sub">10 Claymore Rd, Singapore 229540</p>
-      </div>
+      <img src="assets/doro/doro-point.png" alt="" class="details-doro details-doro--point" aria-hidden="true">
+      <img src="assets/doro/doro-peek.png" alt="" class="details-doro details-doro--peek" aria-hidden="true">
     </div>
   </div>
 
