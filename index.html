@@ -498,20 +498,32 @@
       border-color: var(--error-color);
     }
 
-    /* Radio buttons */
+    /* Toggle buttons (replacing radio) */
     .radio-group {
       display: flex;
-      gap: 20px;
+      gap: 10px;
       flex-wrap: wrap;
     }
 
     .radio-label {
-      display: flex !important;
+      display: inline-flex !important;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       cursor: pointer;
-      font-weight: 300 !important;
+      font-weight: 400 !important;
       font-family: var(--font-body) !important;
+      font-size: 0.85rem;
+      padding: 8px 16px;
+      border-radius: 24px;
+      border: 1.5px solid var(--accent-purple);
+      background: rgba(255, 255, 255, 0.4);
+      transition: all 0.25s ease;
+      user-select: none;
+    }
+
+    .radio-label:hover {
+      background: rgba(255, 255, 255, 0.7);
+      border-color: var(--heading-color);
     }
 
     .radio-label input[type="radio"] {
@@ -523,34 +535,24 @@
       white-space: nowrap;
     }
 
-    .radio-custom {
-      width: 18px;
-      height: 18px;
-      border: 1.5px solid var(--accent-purple);
-      border-radius: 50%;
-      position: relative;
-      transition: border-color 0.3s;
-      flex-shrink: 0;
+    .radio-label input[type="radio"]:focus-visible ~ .radio-text {
+      text-decoration: underline;
     }
 
-    .radio-label input[type="radio"]:focus-visible + .radio-custom {
-      box-shadow: 0 0 0 3px rgba(155, 114, 168, 0.2);
+    .radio-label input[type="radio"]:checked ~ .radio-text {
+      font-weight: 500;
     }
 
-    .radio-label input[type="radio"]:checked + .radio-custom {
-      border-color: var(--heading-color);
-    }
-
-    .radio-label input[type="radio"]:checked + .radio-custom::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 8px;
-      height: 8px;
+    .radio-label:has(input:checked) {
       background: var(--heading-color);
-      border-radius: 50%;
+      border-color: var(--heading-color);
+      color: white;
+      box-shadow: 0 2px 8px rgba(155, 114, 168, 0.3);
+    }
+
+    .radio-emoji {
+      font-size: 1rem;
+      line-height: 1;
     }
 
     /* Conditional fields */
@@ -867,7 +869,11 @@
 
       .radio-group {
         flex-direction: column;
-        gap: 10px;
+        gap: 8px;
+      }
+
+      .radio-label {
+        justify-content: center;
       }
 
       .details-grid {
@@ -1083,13 +1089,13 @@
           <div class="radio-group">
             <label class="radio-label">
               <input type="radio" name="side" value="Groom" required>
-              <span class="radio-custom"></span>
-              Groom's Side
+              <span class="radio-emoji">🍊</span>
+              <span class="radio-text">Groom's Side</span>
             </label>
             <label class="radio-label">
               <input type="radio" name="side" value="Bride" required>
-              <span class="radio-custom"></span>
-              Bride's Side
+              <span class="radio-emoji"><img src="assets/doro/doro-face.png" width="18" height="18" alt="" style="vertical-align:middle;"></span>
+              <span class="radio-text">Bride's Side</span>
             </label>
           </div>
         </div>
@@ -1099,13 +1105,13 @@
           <div class="radio-group">
             <label class="radio-label">
               <input type="radio" name="attending" value="Yes" required>
-              <span class="radio-custom"></span>
-              Joyfully Accepts
+              <span class="radio-emoji"><img src="assets/doro/doro-happy.png" width="20" height="20" alt="" style="vertical-align:middle;"></span>
+              <span class="radio-text">Joyfully Accepts</span>
             </label>
             <label class="radio-label">
               <input type="radio" name="attending" value="No" required>
-              <span class="radio-custom"></span>
-              Regretfully Declines
+              <span class="radio-emoji"><img src="assets/doro/doro-sad.png" width="20" height="20" alt="" style="vertical-align:middle;"></span>
+              <span class="radio-text">Regretfully Declines</span>
             </label>
           </div>
         </div>
@@ -1116,13 +1122,13 @@
             <div class="radio-group">
               <label class="radio-label">
                 <input type="radio" name="plusone" value="0" checked>
-                <span class="radio-custom"></span>
-                Just Me
+                <span class="radio-emoji">🍊</span>
+                <span class="radio-text">Just Me</span>
               </label>
               <label class="radio-label">
                 <input type="radio" name="plusone" value="1">
-                <span class="radio-custom"></span>
-                +1 Guest
+                <span class="radio-emoji">🍊🍊</span>
+                <span class="radio-text">+1 Guest</span>
               </label>
             </div>
           </div>
