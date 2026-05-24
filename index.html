@@ -796,13 +796,13 @@
     /* ---- Random Doro Spawner ---- */
     .spawned-doro {
       position: fixed;
+      left: 0;
       pointer-events: none;
       z-index: 9998;
     }
 
     .spawned-doro--ltr {
       animation: doro-run-ltr linear forwards;
-      scale: -1 1;
     }
 
     .spawned-doro--rtl {
@@ -810,13 +810,13 @@
     }
 
     @keyframes doro-run-ltr {
-      from { transform: translateX(-100px); }
-      to { transform: translateX(calc(100vw + 100px)); }
+      from { left: -100px; transform: scaleX(-1); }
+      to { left: calc(100vw + 100px); transform: scaleX(-1); }
     }
 
     @keyframes doro-run-rtl {
-      from { transform: translateX(calc(100vw + 100px)); }
-      to { transform: translateX(-100px); }
+      from { left: calc(100vw + 100px); }
+      to { left: -100px; }
     }
 
     /* ---- Cursor Trail ---- */
