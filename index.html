@@ -780,6 +780,11 @@
         font-size: 1.6rem;
       }
 
+      .countdown-doro {
+        width: 30px;
+        top: -22px;
+      }
+
       .radio-group {
         flex-direction: column;
         gap: 10px;
@@ -790,8 +795,43 @@
         gap: 20px;
       }
 
+      .details-doro--point {
+        right: -50px;
+        width: 50px;
+      }
+
+      .details-doro--peek {
+        display: none;
+      }
+
       .rsvp-card {
         padding: 28px 20px;
+      }
+
+      .rsvp-doro {
+        right: -60px;
+        width: 50px;
+      }
+
+      .hero-doro--hang {
+        width: 50px;
+        right: 10px;
+      }
+
+      .hero-doro--orange {
+        display: none;
+      }
+
+      .hero-doro--peek {
+        width: 70px;
+      }
+
+      .doro-parade-track img {
+        width: 35px;
+      }
+
+      .doro-parade-track {
+        gap: 25px;
       }
     }
 
@@ -804,12 +844,25 @@
       .countdown-item {
         width: 100%;
       }
+
+      .countdown-doro {
+        display: none;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
         transition-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+      }
+
+      .floating-oranges {
+        display: none;
+      }
+
+      .doro-parade-track {
+        animation: none;
       }
     }
   </style>
