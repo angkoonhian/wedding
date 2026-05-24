@@ -739,8 +739,8 @@
     }
 
     @keyframes parade-scroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+      0% { transform: translateX(-50%); }
+      100% { transform: translateX(0); }
     }
 
     .footer {
@@ -802,11 +802,11 @@
 
     .spawned-doro--ltr {
       animation: doro-run-ltr linear forwards;
+      scale: -1 1;
     }
 
     .spawned-doro--rtl {
       animation: doro-run-rtl linear forwards;
-      scale: -1 1;
     }
 
     @keyframes doro-run-ltr {
@@ -978,10 +978,6 @@
 
   <!-- Hero -->
   <section class="hero" id="hero">
-    <div class="hero-wedding-doros" aria-hidden="true">
-      <img src="assets/doro/doro-sticker.png" alt="" class="hero-wedding-doro">
-      <img src="assets/doro/doro-elegance.png" alt="" class="hero-wedding-doro">
-    </div>
     <p class="hero-intro">Together with their families</p>
     <h1 class="hero-names">
       Koon Hian
@@ -1060,9 +1056,8 @@
           <p class="detail-sub">10 Claymore Rd, Singapore 229540</p>
         </div>
       </div>
-      <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Koon+Hian+%26+Germaine%27s+Wedding&dates=20261010T100000Z/20261010T150000Z&details=Cocktail+Reception+6pm+-+7pm%0ADinner+commences+at+7pm&location=Pan+Pacific+Orchard%2C+10+Claymore+Rd%2C+Singapore+229540" target="_blank" rel="noopener" class="calendar-btn">
-        <span class="calendar-icon">&#128197;</span>
-        Add to Calendar
+      <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=KOON+HIAN+%26+GERMAINE+WEDDING&dates=20261010T100000Z/20261010T150000Z&details=Cocktail+Reception+6pm+-+7pm%0ADinner+commences+at+7pm&location=Pan+Pacific+Orchard%2C+10+Claymore+Rd%2C+Singapore+229540" target="_blank" rel="noopener" class="calendar-btn">
+        ADD TO CALENDAR
       </a>
       <img src="assets/doro/doro-point.png" alt="" class="details-doro details-doro--point" aria-hidden="true">
       <img src="assets/doro/doro-peek.png" alt="" class="details-doro details-doro--peek" aria-hidden="true">
@@ -1121,10 +1116,6 @@
             <select id="additional-guests" name="additionalGuests">
               <option value="0">0</option>
               <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
             </select>
           </div>
 
