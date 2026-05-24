@@ -1229,6 +1229,166 @@
         });
       });
     })();
+
+    // ---- Random Doro Spawner ----
+    (function startSpawner() {
+      var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reducedMotion) return;
+
+      var runImages = ['assets/doro/doro-run-right.gif', 'assets/doro/doro-run-left.gif'];
+      var activeCount = 0;
+      var maxActive = 3;
+
+      function spawnDoro() {
+        if (activeCount >= maxActive) return;
+        activeCount++;
+
+        var img = document.createElement('img');
+        var ltr = Math.random() > 0.5;
+        img.src = runImages[ltr ? 0 : 1];
+        img.className = 'spawned-doro ' + (ltr ? 'spawned-doro--ltr' : 'spawned-doro--rtl');
+        img.style.top = (Math.random() * 80 + 10) + 'vh';
+        img.style.width = (50 + Math.random() * 30) + 'px';
+        img.style.animationDuration = (3 + Math.random() * 2) + 's';
+        img.setAttribute('aria-hidden', 'true');
+        document.body.appendChild(img);
+
+        img.addEventListener('animationend', function() {
+          img.remove();
+          activeCount--;
+        });
+      }
+
+      function scheduleNext() {
+        var delay = 4000 + Math.random() * 4000;
+        setTimeout(function() {
+          spawnDoro();
+          scheduleNext();
+        }, delay);
+      }
+
+      scheduleNext();
+    })();
+
+    // ---- Cursor Trail ----
+    (function setupCursorTrail() {
+      var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reducedMotion) return;
+      var isTouch = 'ontouchstart' in window;
+      if (isTouch) return;
+
+      var lastTime = 0;
+      document.addEventListener('mousemove', function(e) {
+        var now = Date.now();
+        if (now - lastTime < 80) return;
+        lastTime = now;
+
+        var img = document.createElement('img');
+        img.src = 'assets/doro/doro-face.png';
+        img.className = 'cursor-doro';
+        img.style.left = (e.clientX - 12) + 'px';
+        img.style.top = (e.clientY - 12) + 'px';
+        img.style.width = '25px';
+        img.setAttribute('aria-hidden', 'true');
+        document.body.appendChild(img);
+
+        setTimeout(function() { img.remove(); }, 800);
+      });
+    })();
+
+    // ---- Click to Spawn ----
+    (function setupClickSpawn() {
+      var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reducedMotion) return;
+
+      var clickImages = [
+        'assets/doro/doro-sit.png', 'assets/doro/doro-happy.png',
+        'assets/doro/doro-orange.png', 'assets/doro/doro-peek.png',
+        'assets/doro/doro-wave.png', 'assets/doro/doro-face.png'
+      ];
+
+      document.addEventListener('click', function(e) {
+        if (e.target.closest('form, button, a, select, label')) return;
+
+        var img = document.createElement('img');
+        img.src = clickImages[Math.floor(Math.random() * clickImages.length)];
+        img.className = 'click-doro';
+        img.style.left = (e.clientX - 20) + 'px';
+        img.style.top = (e.clientY - 20) + 'px';
+        img.style.width = (30 + Math.random() * 20) + 'px';
+        img.style.setProperty('--dx', (Math.random() * 40 - 20) + 'px');
+        img.setAttribute('aria-hidden', 'true');
+        document.body.appendChild(img);
+
+        setTimeout(function() { img.remove(); }, 1000);
+      });
+    })();
+
+    // ---- Konami Code Easter Egg ----
+    (function setupKonami() {
+      var code = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
+      var pos = 0;
+      var allDoros = [
+        'assets/doro/doro-peek.png', 'assets/doro/doro-sit.png',
+        'assets/doro/doro-happy.png', 'assets/doro/doro-sad.png',
+        'assets/doro/doro-orange.png', 'assets/doro/doro-wave.png',
+        'assets/doro/doro-point.png', 'assets/doro/doro-hang.png',
+        'assets/doro/doro-face.png', 'assets/doro/doro-carry.png'
+      ];
+
+      document.addEventListener('keydown', function(e) {
+        if (e.keyCode === code[pos]) {
+          pos++;
+          if (pos === code.length) {
+            pos = 0;
+            doroExplosion();
+          }
+        } else {
+          pos = 0;
+        }
+      });
+
+      function doroExplosion() {
+        // Flash
+        var flash = document.createElement('div');
+        flash.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:white;z-index:99999;pointer-events:none;opacity:0.8;';
+        document.body.appendChild(flash);
+        setTimeout(function() { flash.remove(); }, 100);
+
+        var cx = window.innerWidth / 2;
+        var cy = window.innerHeight / 2;
+        var count = 40;
+
+        for (var i = 0; i < count; i++) {
+          var img = document.createElement('img');
+          img.src = allDoros[i % allDoros.length];
+          img.setAttribute('aria-hidden', 'true');
+          img.style.position = 'fixed';
+          img.style.left = cx + 'px';
+          img.style.top = cy + 'px';
+          img.style.width = (30 + Math.random() * 40) + 'px';
+          img.style.pointerEvents = 'none';
+          img.style.zIndex = '99998';
+          img.style.transition = 'all ' + (2 + Math.random()) + 's ease-out';
+          document.body.appendChild(img);
+
+          (function(el, idx) {
+            var angle = (Math.PI * 2 * idx) / count;
+            var dist = 200 + Math.random() * 400;
+            var rotation = Math.random() * 720 - 360;
+            requestAnimationFrame(function() {
+              requestAnimationFrame(function() {
+                el.style.left = (cx + Math.cos(angle) * dist) + 'px';
+                el.style.top = (cy + Math.sin(angle) * dist) + 'px';
+                el.style.transform = 'rotate(' + rotation + 'deg)';
+                el.style.opacity = '0';
+              });
+            });
+            setTimeout(function() { el.remove(); }, 3500);
+          })(img, i);
+        }
+      }
+    })();
   </script>
 </body>
 </html>
