@@ -1089,7 +1089,7 @@
           <div class="radio-group">
             <label class="radio-label">
               <input type="radio" name="side" value="Groom" required>
-              <span class="radio-emoji">🍊</span>
+              <span class="radio-emoji"><img src="assets/doro/doro-face.png" width="18" height="18" alt="" style="vertical-align:middle;"></span>
               <span class="radio-text">Groom's Side</span>
             </label>
             <label class="radio-label">
@@ -1118,25 +1118,34 @@
 
         <div id="attending-fields" class="attending-fields hidden">
           <div class="form-group">
-            <label>Bringing a Plus One?</label>
+            <label>Bringing a Date?</label>
             <div class="radio-group">
               <label class="radio-label">
                 <input type="radio" name="plusone" value="0" checked>
-                <span class="radio-emoji">🍊</span>
+                <span class="radio-emoji"><img src="assets/doro/doro-face.png" width="18" height="18" alt="" style="vertical-align:middle;"></span>
                 <span class="radio-text">Just Me</span>
               </label>
               <label class="radio-label">
                 <input type="radio" name="plusone" value="1">
-                <span class="radio-emoji">🍊🍊</span>
+                <span class="radio-emoji"><img src="assets/doro/doro-happy.png" width="18" height="18" alt="" style="vertical-align:middle;"><img src="assets/doro/doro-face.png" width="18" height="18" alt="" style="vertical-align:middle;"></span>
                 <span class="radio-text">+1 Guest</span>
               </label>
             </div>
           </div>
 
-          <div id="guest-names-container"></div>
+          <div id="date-fields" class="attending-fields hidden">
+            <div class="form-group">
+              <label for="date-name">Your Date's Name</label>
+              <input type="text" id="date-name" placeholder="Their full name">
+            </div>
+            <div class="form-group">
+              <label for="date-dietary">Your Date's Dietary Restrictions</label>
+              <input type="text" id="date-dietary" placeholder="e.g. Vegetarian, No shellfish">
+            </div>
+          </div>
 
           <div class="form-group">
-            <label for="dietary">Dietary Restrictions</label>
+            <label for="dietary">Your Dietary Restrictions</label>
             <input type="text" id="dietary" name="dietary" placeholder="e.g. Vegetarian, No shellfish">
           </div>
 
@@ -1262,7 +1271,7 @@
     (function setupForm() {
       var form = document.getElementById('rsvp-form');
       var attendingFields = document.getElementById('attending-fields');
-      var guestNamesContainer = document.getElementById('guest-names-container');
+      var dateFields = document.getElementById('date-fields');
       var plusOneRadios = document.querySelectorAll('input[name="plusone"]');
       var submitBtn = document.getElementById('submit-btn');
       var btnText = submitBtn.querySelector('.btn-text');
@@ -1271,7 +1280,6 @@
       var successDiv = document.getElementById('rsvp-success');
       var rsvpDoro = document.getElementById('rsvp-doro');
 
-      // Doro reactions for attending choice
       document.querySelectorAll('input[name="attending"]').forEach(function(radio) {
         radio.addEventListener('change', function() {
           if (this.value === 'Yes') {
@@ -1279,31 +1287,22 @@
             rsvpDoro.src = 'assets/doro/doro-happy.png';
           } else {
             attendingFields.classList.add('hidden');
+            dateFields.classList.add('hidden');
             rsvpDoro.src = 'assets/doro/doro-sad.png';
           }
         });
       });
 
-      function getPlusOneValue() {
-        var checked = document.querySelector('input[name="plusone"]:checked');
-        return checked ? parseInt(checked.value, 10) : 0;
-      }
-
       plusOneRadios.forEach(function(radio) {
         radio.addEventListener('change', function() {
-          var count = getPlusOneValue();
-          guestNamesContainer.innerHTML = '';
-          for (var i = 1; i <= count; i++) {
-            var div = document.createElement('div');
-            div.className = 'form-group guest-name-field';
-            div.innerHTML = '<label for="guest-name-' + i + '">Guest Name</label>' +
-              '<input type="text" id="guest-name-' + i + '" placeholder="Your guest\'s full name">';
-            guestNamesContainer.appendChild(div);
+          if (this.value === '1') {
+            dateFields.classList.remove('hidden');
+          } else {
+            dateFields.classList.add('hidden');
           }
         });
       });
 
-      // Orange burst celebration
       function celebrate() {
         var cx = window.innerWidth / 2;
         var cy = window.innerHeight / 2;
@@ -1322,7 +1321,6 @@
           document.body.appendChild(el);
           setTimeout(function(e) { e.remove(); }.bind(null, el), 2000);
         }
-        // Confetti
         var colors = ['#D4B8D8', '#E8B8A8', '#FFA040', '#F3E8FF', '#9B72A8'];
         for (var j = 0; j < 40; j++) {
           var c = document.createElement('div');
@@ -1356,22 +1354,18 @@
 
         if (hasError) { formError.classList.remove('hidden'); return; }
 
-        // Collect guest names
-        var guestNames = [];
-        var guestCount = attending.value === 'Yes' ? getPlusOneValue() : 0;
-        for (var i = 1; i <= guestCount; i++) {
-          var input = document.getElementById('guest-name-' + i);
-          if (input) guestNames.push(input.value.trim());
-        }
+        var bringingDate = attending.value === 'Yes' && document.querySelector('input[name="plusone"]:checked')
+          && document.querySelector('input[name="plusone"]:checked').value === '1';
 
         var data = {
+          groupId: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
           name: name,
           side: side.value,
           attending: attending.value,
-          additionalGuests: attending.value === 'Yes' ? String(getPlusOneValue()) : '0',
-          guestNames: guestNames.join(' | '),
           dietary: attending.value === 'Yes' ? document.getElementById('dietary').value.trim() : '',
           specialRequests: attending.value === 'Yes' ? document.getElementById('special-requests').value.trim() : '',
+          dateName: bringingDate ? document.getElementById('date-name').value.trim() : '',
+          dateDietary: bringingDate ? document.getElementById('date-dietary').value.trim() : '',
           message: document.getElementById('message').value.trim()
         };
 
