@@ -3,7 +3,7 @@
  *
  * Setup instructions:
  * 1. Create a new Google Sheet
- * 2. Add header row: Timestamp | Name | Side | Attending | Additional Guests | Dietary Restrictions | Special Requests | Message
+ * 2. Add header row: Timestamp | Name | Side | Attending | Additional Guests | Guest Names | Dietary Restrictions | Special Requests | Message
  * 3. Go to Extensions > Apps Script
  * 4. Delete any existing code and paste this entire file
  * 5. Click Deploy > New deployment
@@ -31,6 +31,7 @@ function doPost(e) {
       data.side || '',
       data.attending || '',
       data.additionalGuests || '0',
+      data.guestNames || '',
       data.dietary || '',
       data.specialRequests || '',
       data.message || ''
